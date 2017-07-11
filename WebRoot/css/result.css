@@ -1,0 +1,15 @@
+@CHARSET "UTF-8";
+
+#test{
+	color:red;
+	font-size:4em;
+}
+
+.result_title{
+	font-size:1.5em;
+}
+.result_content{
+	font-sizs:1em;
+	padding:5px, auto;
+	
+}

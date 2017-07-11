@@ -3,8 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="/css/result.css">
 </head>
 <body>
-	搜索结果
+	<p>本页#(result.getJsonArr().size())条结果</p>
+	<p>共#(result.getTotalHit())条结果</p>
+	
+	<br />
+
+	#for(x : result.getJsonArr())
+	<div style="text-align:left;" class="result_title" ><a href='#(x.get("url"))'> #(x.get("title")) </a></div>
+	<div style="text-align:left;" class="result_content" >#(x.get("content"))</div>
+	#end
+
+
 </body>
 </html>
