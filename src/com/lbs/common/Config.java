@@ -8,7 +8,7 @@ public class Config  extends JFinalConfig  {
     }
     public void configRoute(Routes me) {
         me.add("/", IndexController.class);
-        //me.add("/result/result.html",ResultController.class);
+        me.add("/result/result.html",ResultController.class);
     }
     public void configEngine(Engine me) {}
     public void configPlugin(Plugins me) {}
