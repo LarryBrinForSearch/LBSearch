@@ -4,4 +4,8 @@ public class ResultController  extends Controller{
 	public void index(){
 		render("");
 	}
+	public void search() {
+		String string = getPara("searchString");
+		renderText(string);
+	}
 }
