@@ -36,6 +36,7 @@ public class ResultController  extends Controller{
 		case 6:
 			channel = "军事";
 			break;
+		
 		}
 		setAttr("channel",channel);
 		render("/index/index.html");
@@ -43,6 +44,9 @@ public class ResultController  extends Controller{
 	public  void search() {
 		searchString = getPara("searchString");
 		channel = getPara("channel");
+		if(!("财经国际股票新闻体育军事".contains(channel))) {
+			channel = null;
+		}
 		ResultModel result = Config.sfs.QueryAtFirst(searchString,channel,page_size);
 		setAttr("result", result);
 		setAttr("page_size", page_size);
