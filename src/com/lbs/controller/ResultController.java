@@ -16,7 +16,7 @@ public class ResultController  extends Controller{
 	}
 	public  void search() {
 		searchString = getPara("searchString");
-		ResultModel result = Config.sfs.QueryAtFirst(searchString,null);
+		ResultModel result = Config.sfs.QueryAtFirst(searchString,null,page_size);
 		setAttr("result", result);
 		setAttr("page_size", page_size);
 		setAttr("current_page", 1);
