@@ -1,0 +1,27 @@
+@CHARSET "UTF-8";
+
+#test{
+	color:red;
+	font-size:4em;
+}
+
+.result_title{
+	font-size:1.5em;
+}
+.result_content{
+	font-sizs:1em;
+	padding:5px, auto;
+	
+}
+.item{
+
+
+	
+}
+.main_content{
+	width:60%;
+	margin:20px 30% 0 8%;
+	border-right:1px solid;
+	padding:20px 3em;
+	background:#fff;
+}

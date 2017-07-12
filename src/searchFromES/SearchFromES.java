@@ -1,4 +1,5 @@
 package searchFromES;
+import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -6,7 +7,10 @@ import java.util.Map;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.Client;
+import org.elasticsearch.client.transport.TransportClient;
+import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.text.Text;
+import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
@@ -34,9 +38,21 @@ public class SearchFromES {
 	
 	static Client client = null;
 	
-	public static void initSearch(Client clients){
-		client=clients;
+	static{
+		Settings settings = Settings.settingsBuilder()  
+                .put("cluster.name", "hw_es_cluster").build();  
+		try {  
+            //初始化连接客户端  
+            client = new TransportClient.Builder().settings(settings).build()  
+                    .addTransportAddress(new InetSocketTransportAddress(new InetSocketAddress("117.78.37.208",9300)))  
+                    .addTransportAddress(new InetSocketTransportAddress(new InetSocketAddress("117.78.37.224",9300)))  
+                    .addTransportAddress(new InetSocketTransportAddress(new InetSocketAddress("117.78.37.196",9300)))
+                    .addTransportAddress(new InetSocketTransportAddress(new InetSocketAddress("117.78.37.177",9300)));  
+        }catch (Exception e){  
+            e.printStackTrace();  
+        }  
 	}
+	
 	
 	public static void queryWithString(String target) {
 		SearchRequestBuilder responsebuilder = client.prepareSearch("crawler").setTypes("website");
@@ -52,7 +68,7 @@ public class SearchFromES {
 	/*
 	 * match实现的多字段查询：在标题和正文中若出现目标字符串都将会匹配
 	 */
-	public static void multiQuery(String target) {
+	public static void Query(String target) {
 		SearchRequestBuilder responsebuilder = client.prepareSearch("crawler").setTypes("website");
 		SearchResponse myresponse = responsebuilder.setQuery(
 				QueryBuilders.multiMatchQuery(target, "title", "content"))
@@ -70,7 +86,7 @@ public class SearchFromES {
 
 	
 	//需要的返回结果有url，title，content，pubtime，channel_name，website_name，score
-	public static ResultModel  boolQuery(String target,String channel_name){
+	public static ResultModel  QueryAtFirst(String target,String channel_name){
 		
 		//构建搜索请求
 		//索引为lbsearch，类型为website
@@ -138,8 +154,8 @@ public class SearchFromES {
 			Map params= hits.getHits()[i].getSource();								//得到查询结果的数据源
 			Map<String,String> par = new HashMap<String,String>();
 			par.put("url", (String)params.get("url"));
-			par.put("title", title.substring(0, 70));		//取title的前70个字符
-			par.put("content", content.substring(0,300));	//取content的前300个字符
+			par.put("title", title);			//取title的前70个字符
+			par.put("content", content);	//取content的前300个字符
 			par.put("pubtime", (String)params.get("pubtime"));						//得到发布时间：
 			par.put("channel_name", (String)params.get("channel_name"));			//频道名称
 			par.put("website_name", (String)params.get("website_name"));			//网站来源名称
@@ -157,7 +173,7 @@ public class SearchFromES {
 	
 	
 	//需要的返回结果有url，title，content，pubtime，channel_name，website_name，score
-		public static ResultModel  LbQuery(int atPages,int pageSize,String target,String channel_name){
+		public static ResultModel  QueryLater(int atPages,int pageSize,String target,String channel_name){
 			
 			//构建搜索请求
 			//索引为lbsearch，类型为website
@@ -225,8 +241,8 @@ public class SearchFromES {
 				Map params= hits.getHits()[i].getSource();								//得到查询结果的数据源
 				Map<String,String> par = new HashMap<String,String>();
 				par.put("url", (String)params.get("url"));
-				par.put("title", title.substring(0, 70));		//取title的前70个字符
-				par.put("content", content.substring(0,300));	//取content的前300个字符
+				par.put("title", title.length()>70? title.substring(0, 70) : content);			//取title的前70个字符
+				par.put("content", content.length()>300? content.substring(0,300) : content);	//取content的前300个字符
 				par.put("pubtime", (String)params.get("pubtime"));						//得到发布时间：
 				par.put("channel_name", (String)params.get("channel_name"));			//频道名称
 				par.put("website_name", (String)params.get("website_name"));			//网站来源名称

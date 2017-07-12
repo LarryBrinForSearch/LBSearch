@@ -3,8 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="/css/result.css">
 </head>
 <body>
-	搜索结果
+	<p>本页#(result.getJsonArr().size())条结果</p>
+	<p>共#(result.getTotalHit())条结果</p>
+	
+	<br />
+
+	<div class="main_content">
+		#for(x : result.getJsonArr())
+		<div class="item">
+			<div style="text-align:left;" class="result_title" ><a href='#(x.get("url"))' target="_blank"> #(x.get("title")) </a></div>
+			<div>来源：#(x.get("website_name")) &nbsp; 
+				
+				#if (x.get("pubtime")!="")
+					发布时间:#(x.get("pubtime")) &nbsp;
+				#end
+				相关度:#(x.get("score"))</div>
+			<div style="text-align:left;" class="result_content" >#(x.get("content"))</div>
+		</div>
+		#end
+		
+		
+		
+	</div>
+
+
+
 </body>
 </html>
