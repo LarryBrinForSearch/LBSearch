@@ -1,5 +1,4 @@
 #content{
-
 	search:0 auto;
 	height:70%;
 }
@@ -14,7 +13,7 @@
 .tag{
 	margin:10px 0;
 }
-.footer{	
+.footer{
 	top:90%;
 }
 
@@ -25,10 +24,6 @@
 	text-align:center;
 }
 
-#test{
-	
-	color:red;
-}
 .solid{
 	border:solid 1px;
 }
