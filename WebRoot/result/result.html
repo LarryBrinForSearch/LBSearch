@@ -5,16 +5,40 @@
 <title>larrybrin for search</title>
 <link rel="stylesheet" type="text/css" href="/css/result.css">
 <link rel="shortcut icon" href="/img/button.png" />
+<script type="text/javascript" src="/js/echarts.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/pie.css">
 </head>
 <body>
+	<div class="right_column ">
+		<div class="inner_right">
+	    	<div id="main"  class=""></div>
+		
+		</div>
 
-	<br />
+	</div>
+
+
 
 	<div class="main_content">
+	<div class="inner_content">
+		<div id="search" class="">
+			<form id="form" name=f action="/result/search" class="" >
+				<input type="text" name="searchString" value="" class="searchString"/>
+				<input type="hidden" name="channel" value=#(channel)  />
+				<input value="提交" type="submit" class="button" >
+				<div class="tag"><a href="/result/setChannel2/1">财经</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<a href="/result/setChannel2/2">国际</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<a href="/result/setChannel2/3">股票</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<a href="/result/setChannel2/4">新闻</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<a href="/result/setChannel2/5">体育</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<a href="/result/setChannel2/6">军事</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</div>
+			</form>
+		</div>
 		#for(x : result.getJsonArr())
 		<div class="item">
 			<div style="text-align:left;" class="result_title" ><a href='#(x.get("url"))' target="_blank"> #(x.get("title")) </a></div>
-			<div>来源：#(x.get("website_name")) &nbsp; 
+			<div class="label">来源：#(x.get("website_name")) &nbsp; 
 				
 				#if (x.get("pubtime")!="")
 					发布时间:#(x.get("pubtime")) &nbsp;
@@ -31,68 +55,152 @@
 		current_page
 		list_size
  -->
-	
-        #if (total_page > list_size) <!-- 如果超过10页  -->
-            #if (current_page < 5)   <!--  -->
-                <span class="last_page">上一页</span>
+		<!-- 处理上一页标签 -->
+       	#if (current_page>1)
+       		<span class="last_page"><a href="/result/page/#(current_page-1)">上一页</a></span>
+       	#else
+           	<span class="last_page">上一页</span>
+        #end
             
-                #for(i=1; i < current_page;i++)
-                    <a href="/result/page/#(i)"> #(i) </a>
-                #end
-                
-                <span class="current_page"> #(current_page) </span>
-                
-                #for(i= (current_page+1); i<= list_size; i++)
-                    <a href="/result/page/#(i)"> #(i) </a>
-                #end            
-                <span class="next_page"><a href="/result/page/#(current_page+1)">下一页  </a></span>
-            #elseif (current_page + 5 > total_page )
-                <span class="last_page"><a href="/result/page/#(current_page-1)">上一页</a></span>
-            
-                #for(i=current_page-4; i < current_page;i++)
-                    <a href="/result/page/#(i)"> #(i) </a>
-                #end
-                
-                <span class="current_page"> #(current_page) </span>
-                
-                #for(i= (current_page+1); i<= total_page; i++)
-                    <a href="/result/page/#(i)"> #(i) </a>
-                #end            
-                <span class="next_page">下一页 </span> 
-            
-            #else
-                <span class="last_page"><a href="/result/page/#(current_page-1)">上一页</a></span>
-            
-                #for(i=current_page-4; i < current_page;i++)
-                    <a href="/result/page/#(i)"> #(i) </a>
-                #end
-                
-                <span class="current_page"> #(current_page) </span>
-                
-                #for(i= (current_page+1); i<= current_page+5; i++)
-                    <a href="/result/page/#(i)"> #(i) </a>
-                #end            
-                <span class="next_page"><a href="/result/page/#(current_page+1)">下一页  </a></span>           
-            #end
 
-        #else <!-- 如果不超过十页，直接输出列表即可 -->
-            <span class="last_page">上一页</span>
-            
+        #if (current_page < 5)   <!--  -->
             #for(i=1; i < current_page;i++)
-                        <a href="/result/page/#(i)"> #(i) </a>
+                <a href="/result/page/#(i)"> #(i) </a>
             #end
             
             <span class="current_page"> #(current_page) </span>
             
-            #for(i= (current_page+1); i< total_page; i++)
+            #for(i= (current_page+1); i<= list_size; i++)
+                <a href="/result/page/#(i)"> #(i) </a>
+            #end            
+        #elseif (current_page + 5 > total_page )
+            #for(i=current_page-4; i < current_page;i++)
                 <a href="/result/page/#(i)"> #(i) </a>
             #end
-            <span class="next_page"><a href="/result/page/#(current_page+1)">下一页</a></span>
             
+            <span class="current_page"> #(current_page) </span>
+            
+            #for(i= (current_page+1); i<= total_page; i++)
+                <a href="/result/page/#(i)"> #(i) </a>
+            #end            
+        #else
+            #for(i=current_page-4; i < current_page;i++)
+                <a href="/result/page/#(i)"> #(i) </a>
+            #end
+            <span class="current_page"> #(current_page) </span>
+            #for(i= (current_page+1); i<= current_page+5; i++)
+                <a href="/result/page/#(i)"> #(i) </a>
+            #end                       
         #end
+
+
+            
+        <!-- 处理下一页标签 -->
+        #if (current_page < total_page)
+        	<span class="next_page"><a href="/result/page/#(current_page+1)">下一页</a></span>
+        #else
+        	<span class="next_page">下一页 </span> 
+        #end
+		</div>
 	</div>
+    <script type="text/javascript">
+        var myChart = echarts.init(document.getElementById("main"));
+        var option = {
+            toolbox:{
+                feature: {
+                    saveAsImage: {},
+                    restore:{},
+                    dataView:{},
+                },
+                right:'2%'
+            },
+            title: {
+                text:"类型分布统计", // 类型，语种，国家，
+                textStyle:{
+                    color:'rgba(255, 255, 255, 0.5)'
+                },
+                 left: 'center',
+                 top:'1%'
+            },
+
+            series:{
+
+                type:"pie",
+
+                radius:"55%",
+                data:[
+                        {value:235, name:'中华网'},
+                        {value:274, name:'中国青年网'},
+                        {value:310, name:'京华网'},
+                        {value:335, name:'人民网'},
+                        {value:400, name:'凤凰网'}
+                    ],
+                // 南丁格尔图
+                roseType: 'angle',
+                // // 阴影设置
+                itemStyle: {
+                    normal: {
+                        // 阴影的大小
+                        shadowBlur: 50,
+                        // 阴影水平方向上的偏移
+                        shadowOffsetX: 0,
+                        // 阴影垂直方向上的偏移
+                        shadowOffsetY: 0,
+                        // 阴影颜色
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    },
+                //     //在 itemStyle 设置：扇形的颜色
+                //     normal: {
+                //         // 设置扇形的颜色
+                //         color: '#c23531',
+                //         shadowBlur: 200,
+                //         shadowColor: 'rgba(0, 0, 0, 0.5)'
+                //     },
+                    // 设置鼠标悬浮时通过阴影突出。
+                    emphasis: {
+                        shadowBlur: 200,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                },
 
 
+                // 字体样式
+                textStyle: {
+                    color: 'rgba(255, 255, 255, 0.3)',
+                    fontSize:14, // 默认为12
+                    fontWeight:'bold', // 默认normal
+                },
 
+                // 将标签的视觉引导线的颜色设为浅色
+                labelLine: {
+                    normal: {
+                        lineStyle: {
+                            color: 'rgba(255, 255, 255, 0.3)'
+                        }
+                    }
+                },
+
+
+            },
+                // 全局背景色
+                backgroundColor: '#2c343c',
+                // 设置明暗度的变化,
+                // 通过 visualMap 组件将数值的大小映射到明暗度。
+                visualMap: {
+                    // 不显示 visualMap 组件，只用于明暗度的映射
+                    show: false,
+                    // 映射的最小值为 80
+                    min: 80,
+                    // 映射的最大值为 600
+                    max: 600,
+                    inRange: {
+                        // 明暗度的范围是 0 到 1
+                        colorLightness: [0, 1]
+                    }
+                },
+        };
+
+        myChart.setOption(option);
+    </script>
 </body>
 </html>

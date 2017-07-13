@@ -3,6 +3,9 @@
 	<title>larrybrin for search</title>
 	<link rel="shortcut icon" href="/img/button.png" />
 	<link rel="stylesheet" type="text/css" href="/css/basic.css">
+	<style type="text/css">
+		a:hover,a:visited{color:#000}
+	</style>
 </head>
 <body>
 	<div id="content" class="">
@@ -13,13 +16,14 @@
 		<div id="search" class="">
 			<form id="form" name=f action="/result/search" class=" center" >
 				<input type="text" name="searchString" value="" style="width:450px;height:40px"/>
+				<input type="hidden" name="channel" value=#(channel) />
 				<input value="提交" type="submit" style="width:50px;height:40px;">
-				<div class="tag"><a href="">财经</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<a href="">国际</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<a href="">股票</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<a href="">新闻</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<a href="">体育</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<a href="">军事</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<div class="tag"><a href="/result/setChannel/1">财经</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<a href="/result/setChannel/2">国际</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<a href="/result/setChannel/3">股票</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<a href="/result/setChannel/4">新闻</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<a href="/result/setChannel/5">体育</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<a href="/result/setChannel/6">军事</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				</div>
 			</form>
 		</div>

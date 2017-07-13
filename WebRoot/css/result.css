@@ -1,27 +1,59 @@
 @CHARSET "UTF-8";
 
-#test{
-	color:red;
-	font-size:4em;
-}
 
 .result_title{
-	font-size:1.5em;
+	font-size:1.3em;
 }
 .result_content{
-	font-sizs:1em;
+	font-size: 1em;
 	padding:5px, auto;
+	margin:.5em 1em;
+	line-height:1.3em;
+	max-height:5.2em;
+	overflow:hidden;
+}
+.label{font-size:.5em}
+#search{
+	width:80%;
+	margin:1em auto;
 	
 }
-.item{
-
-
-	
+.searchString{
+	width:80%;
+	height:2em;
+}
+.button{width:15%; height:2.3em;}
+.inner_content{
+	margin-left:2em;
+	margin-top:1em;
 }
 .main_content{
-	width:60%;
-	margin:20px 30% 0 8%;
+	width:55%;
+	margin-right:40%;
+	margin-left:5%;
 	border-right:1px solid;
-	padding:20px 3em;
+	padding:0;
 	background:#fff;
+
+}
+
+.right_column{
+	width:39%;
+	min-height:200px;
+	float:right;
+	padding:0
+}
+.inner_right{
+
+}
+#main{
+	width:100%;
+	min-height:400px;
+	margin-top:3em;
+}
+.debug{
+	border:solid 1px;
+}
+.debug2{
+	border:solid 1px red;
 }
