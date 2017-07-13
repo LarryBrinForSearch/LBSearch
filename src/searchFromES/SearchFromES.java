@@ -166,8 +166,7 @@ public class SearchFromES {
 			par.put("channel_name", (String)params.get("channel_name"));			//频道名称
 			par.put("website_name", (String)params.get("website_name"));			//网站来源名称
 			par.put("score", hits.getHits()[i].getScore()+"");						//匹配度
-			par.put("time", myresponse.getTook()+"");
-			
+	
 			JSONObject array = new JSONObject(par);
 			jsonArr.add(array);
 		}
@@ -175,7 +174,7 @@ public class SearchFromES {
 		System.out.println(hits.getHits().length);
 		System.out.println(myresponse.getTook());
 		
-		return new ResultModel(myresponse.getHits().getTotalHits(),jsonArr);
+		return new ResultModel(myresponse.getHits().getTotalHits(),jsonArr,myresponse.getTook()+"",null);
 	}
 	
 	
@@ -262,7 +261,7 @@ public class SearchFromES {
 			System.out.println(hits.getHits().length);
 			System.out.println(myresponse.getTook());
 			
-			return new ResultModel(myresponse.getHits().getTotalHits(),jsonArr);
+			return new ResultModel(myresponse.getHits().getTotalHits(),jsonArr,myresponse.getTook()+"",null);
 		}
 		
 		
@@ -431,6 +430,10 @@ public class SearchFromES {
 			//索引为lbsearch，类型为website
 			SearchRequestBuilder responsebuilder = client.prepareSearch("lbsearch").setTypes("website");
 			
+			// 构造聚合条件。等价于group by channel_name
+			TermsBuilder teamAgg = AggregationBuilders.terms("count").field("channel_name").size(20);
+			responsebuilder.addAggregation(teamAgg);
+			
 			if (channel_name !=null)
 			{
 				responsebuilder.setQuery(QueryBuilders.boolQuery()
@@ -503,11 +506,34 @@ public class SearchFromES {
 				JSONObject array = new JSONObject(par);
 				jsonArr.add(array);
 			}
-			System.out.println(hits.totalHits() / 10 + "页");
-			System.out.println(hits.getHits().length);
-			System.out.println(myresponse.getTook());
 			
-			return new ResultModel(myresponse.getHits().getTotalHits(),jsonArr);
+			//统计结果解析
+			// aggregation结果解析
+			java.util.Map<String, Aggregation> aggMap = myresponse.getAggregations().asMap();
+	        //得到聚合count的项
+			StringTerms Aggteam = (StringTerms) aggMap.get("count");
+			Iterator<org.elasticsearch.search.aggregations.bucket.terms.Terms.Bucket> teamBucketIt = Aggteam.getBuckets()
+					.iterator();
+			//统计结果
+			HashMap<String,Long> countResult=new HashMap<String,Long>();
+			
+			long resultSum = 0;	//统计结果的总数
+			long mainResult= 0;	//前六条统计结果总数
+			int cs=0; 			//取前六条
+			while (teamBucketIt.hasNext()) {
+				org.elasticsearch.search.aggregations.bucket.terms.Terms.Bucket buck = teamBucketIt.next();
+				// 记录数
+				long counts = buck.getDocCount();
+				
+				if(cs<6){
+					countResult.put((String) buck.getKey(), counts);// 文章类型名，记录数
+					mainResult +=counts;
+				}
+				resultSum += counts;
+				cs++;
+			}
+			countResult.put("其他", resultSum-mainResult);
+			return new ResultModel(myresponse.getHits().getTotalHits(),jsonArr,myresponse.getTook()+"",countResult);
 		}
 	
 }

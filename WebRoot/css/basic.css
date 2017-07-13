@@ -1,11 +1,12 @@
+/* 页面/index/index.html的样式表 */
 #content{
 	search:0 auto;
 	height:70%;
 }
 #lg{
 	margin-top:100px;
-	width:355px;
-	height:125px;
+	width:480px;
+	height:130px;
 }
 #form{
 	width:550px;

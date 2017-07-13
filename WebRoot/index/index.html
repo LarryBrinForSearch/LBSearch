@@ -9,10 +9,27 @@
 </head>
 <body>
 	<div id="content" class="">
-
-		<div id="lg" class="center">
-			<img hidefocus=true src="/img/head.png" class="center" width="350" height="129" />
-		</div>
+		#if(null==channel)
+			<div id="lg" class="center">
+				<img hidefocus=true src="/img/head.png" class="center" width="350" height="129" />
+			</div>
+		#else
+			<div id="lg" class="center">
+				<table>
+					<tr>
+						<td>
+						<img hidefocus=true src="/img/head.png" class="left" width="350" height="129" />
+						</td>
+						<td>
+						<img hidefocus=true src="/img/#(channel).png" class="right" width="40" height="40" />
+						</td>
+					</tr>
+				</table>
+				 
+				
+			</div>
+		#end
+		
 		<div id="search" class="">
 			<form id="form" name=f action="/result/search" class=" center" >
 				<input type="text" name="searchString" value="" style="width:450px;height:40px"/>
