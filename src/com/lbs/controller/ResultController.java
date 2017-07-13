@@ -43,11 +43,13 @@ public class ResultController  extends Controller{
 	}
 	public  void search() {
 		searchString = getPara("searchString");
+
 		channel = getPara("channel");
 		if(!("财经国际股票新闻体育军事".contains(channel))) {
 			channel = null;
 		}
-		ResultModel result = Config.sfs.QueryAtFirst(searchString,channel,page_size);
+		ResultModel result = Config.sfs.multiQuery(searchString,channel,page_size);
+
 		setAttr("result", result);
 		setAttr("page_size", page_size);
 		setAttr("current_page", 1);
