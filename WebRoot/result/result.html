@@ -6,15 +6,14 @@
 <link rel="stylesheet" type="text/css" href="/css/result.css">
 <link rel="shortcut icon" href="/img/button.png" />
 <script type="text/javascript" src="/js/echarts.min.js"></script>
-<link rel="stylesheet" type="text/css" href="css/pie.css">
+<link rel="stylesheet" type="text/css" href="/css/pie.css">
 </head>
 <body>
-	<div class="right_column ">
-		<div class="inner_right">
+	<div class="right_column  " >
+		<h2>本次搜索结果各频道分布图	</h2>
+		<div class="inner_right " > 
 	    	<div id="main"  class=""></div>
-		
 		</div>
-
 	</div>
 
 
@@ -23,18 +22,33 @@
 	<div class="inner_content">
 		<div id="search" class="">
 			<form id="form" name=f action="/result/search" class="" >
-				<input type="text" name="searchString" value="" class="searchString"/>
-				<input type="hidden" name="channel" value=#(channel)  />
-				<input value="提交" type="submit" class="button" >
-				<div class="tag"><a href="/result/setChannel2/1">财经</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<a href="/result/setChannel2/2">国际</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<a href="/result/setChannel2/3">股票</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<a href="/result/setChannel2/4">新闻</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<a href="/result/setChannel2/5">体育</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<a href="/result/setChannel2/6">军事</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				</div>
+
+				 <table id="s_tb" border="0" align="center" >
+				 <tr>
+					<td colspan="7"><input id="search_text" type="text"  name="searchString" /><td>
+					<td colspan="2"><input id="s_button" value="搜索" type="submit" ></td>
+				 </tr>
+	
+					<input type="hidden" name="channel" value=#(channel)  />
+				<tr id="tag">
+					<td><a href="/result/setChannel2/1">财经</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					<td><a href="/result/setChannel2/2">国际</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					<td><a href="/result/setChannel2/3">股票</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					<td><a href="/result/setChannel2/4">新闻</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					<td><a href="/result/setChannel2/5">体育</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					<td><a href="/result/setChannel2/6">军事</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					<td><a href="/result/setChannel2/7">全部</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					<td colspan="2">&nbsp;</td>
+				</tr>
+
+						
+				</table>
+
 			</form>
 		</div>
+		<p >本页<span class="jf">#(result.getJsonArr().size())</span> 条结果&nbsp;
+			共<span class="jf">#(result.getTotalHit())</span> 条结果&nbsp;
+			搜索用时<span class="jf">#(result.getTime())</span></p>
 		#for(x : result.getJsonArr())
 		<div class="item">
 			<div style="text-align:left;" class="result_title" ><a href='#(x.get("url"))' target="_blank"> #(x.get("title")) </a></div>
@@ -47,7 +61,7 @@
 			<div style="text-align:left;" class="result_content" >#(x.get("content"))</div>
 		</div>
 		#end
-		<p>本页#(result.getJsonArr().size())条结果 &nbsp;共#(result.getTotalHit())条结果</p>
+
 	
 		#set(total_page=result.getTotalHit()/page_size+1)
 <!-- 	total_page
@@ -61,38 +75,46 @@
        	#else
            	<span class="last_page">上一页</span>
         #end
-            
-
-        #if (current_page < 5)   <!--  -->
-            #for(i=1; i < current_page;i++)
-                <a href="/result/page/#(i)"> #(i) </a>
-            #end
-            
-            <span class="current_page"> #(current_page) </span>
-            
-            #for(i= (current_page+1); i<= list_size; i++)
-                <a href="/result/page/#(i)"> #(i) </a>
-            #end            
-        #elseif (current_page + 5 > total_page )
-            #for(i=current_page-4; i < current_page;i++)
-                <a href="/result/page/#(i)"> #(i) </a>
-            #end
-            
-            <span class="current_page"> #(current_page) </span>
-            
-            #for(i= (current_page+1); i<= total_page; i++)
-                <a href="/result/page/#(i)"> #(i) </a>
-            #end            
-        #else
-            #for(i=current_page-4; i < current_page;i++)
-                <a href="/result/page/#(i)"> #(i) </a>
-            #end
-            <span class="current_page"> #(current_page) </span>
-            #for(i= (current_page+1); i<= current_page+5; i++)
-                <a href="/result/page/#(i)"> #(i) </a>
-            #end                       
-        #end
-
+	            
+		#if (total_page >= list_size)
+	        #if (current_page < 5)   <!--  -->
+	            #for(i=1; i < current_page;i++)
+	                <a href="/result/page/#(i)"> #(i) </a>
+	            #end
+	            
+	            <span class="current_page"> #(current_page) </span>
+	            
+	            #for(i= (current_page+1); i<= list_size; i++)
+	                <a href="/result/page/#(i)"> #(i) </a>
+	            #end            
+	        #elseif (current_page + 5 > total_page )
+	            #for(i=current_page-4; i < current_page;i++)
+	                <a href="/result/page/#(i)"> #(i) </a>
+	            #end
+	            
+	            <span class="current_page"> #(current_page) </span>
+	            
+	            #for(i= (current_page+1); i<= total_page; i++)
+	                <a href="/result/page/#(i)"> #(i) </a>
+	            #end            
+	        #else
+	            #for(i=current_page-4; i < current_page;i++)
+	                <a href="/result/page/#(i)"> #(i) </a>
+	            #end
+	            <span class="current_page"> #(current_page) </span>
+	            #for(i= (current_page+1); i<= current_page+5; i++)
+	                <a href="/result/page/#(i)"> #(i) </a>
+	            #end                       
+	        #end
+		#else
+				#for(i=1; i < current_page;i++)
+	                <a href="/result/page/#(i)"> #(i) </a>
+	            #end
+	            <span class="current_page"> #(current_page) </span>
+	            #for(i= (current_page+1); i<= total_page; i++)
+	                <a href="/result/page/#(i)"> #(i) </a>
+	            #end 
+		#end
 
             
         <!-- 处理下一页标签 -->

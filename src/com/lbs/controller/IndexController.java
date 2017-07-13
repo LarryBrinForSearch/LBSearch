@@ -6,6 +6,6 @@ public class IndexController extends Controller {
 		render("/index/index.html");
 	}
 	public static void main(String[] args) {
-		JFinal.start("WebRoot", 8889, "/", 5);
+		JFinal.start("WebRoot", 8888, "/", 5);
 	}
 }
