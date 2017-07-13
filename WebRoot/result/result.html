@@ -6,7 +6,7 @@
 <link rel="stylesheet" type="text/css" href="/css/result.css">
 <link rel="shortcut icon" href="/img/button.png" />
 <script type="text/javascript" src="/js/echarts.min.js"></script>
-<link rel="stylesheet" type="text/css" href="css/pie.css">
+<link rel="stylesheet" type="text/css" href="/css/pie.css">
 </head>
 <body>
 	<div class="right_column ">
@@ -35,6 +35,7 @@
 				</div>
 			</form>
 		</div>
+		<p>本页#(result.getJsonArr().size())条结果 &nbsp;共#(result.getTotalHit())条结果&nbsp;搜索用时result.</p>
 		#for(x : result.getJsonArr())
 		<div class="item">
 			<div style="text-align:left;" class="result_title" ><a href='#(x.get("url"))' target="_blank"> #(x.get("title")) </a></div>
@@ -47,7 +48,7 @@
 			<div style="text-align:left;" class="result_content" >#(x.get("content"))</div>
 		</div>
 		#end
-		<p>本页#(result.getJsonArr().size())条结果 &nbsp;共#(result.getTotalHit())条结果</p>
+
 	
 		#set(total_page=result.getTotalHit()/page_size+1)
 <!-- 	total_page
@@ -61,38 +62,46 @@
        	#else
            	<span class="last_page">上一页</span>
         #end
-            
-
-        #if (current_page < 5)   <!--  -->
-            #for(i=1; i < current_page;i++)
-                <a href="/result/page/#(i)"> #(i) </a>
-            #end
-            
-            <span class="current_page"> #(current_page) </span>
-            
-            #for(i= (current_page+1); i<= list_size; i++)
-                <a href="/result/page/#(i)"> #(i) </a>
-            #end            
-        #elseif (current_page + 5 > total_page )
-            #for(i=current_page-4; i < current_page;i++)
-                <a href="/result/page/#(i)"> #(i) </a>
-            #end
-            
-            <span class="current_page"> #(current_page) </span>
-            
-            #for(i= (current_page+1); i<= total_page; i++)
-                <a href="/result/page/#(i)"> #(i) </a>
-            #end            
-        #else
-            #for(i=current_page-4; i < current_page;i++)
-                <a href="/result/page/#(i)"> #(i) </a>
-            #end
-            <span class="current_page"> #(current_page) </span>
-            #for(i= (current_page+1); i<= current_page+5; i++)
-                <a href="/result/page/#(i)"> #(i) </a>
-            #end                       
-        #end
-
+	            
+		#if (total_page >= list_size)
+	        #if (current_page < 5)   <!--  -->
+	            #for(i=1; i < current_page;i++)
+	                <a href="/result/page/#(i)"> #(i) </a>
+	            #end
+	            
+	            <span class="current_page"> #(current_page) </span>
+	            
+	            #for(i= (current_page+1); i<= list_size; i++)
+	                <a href="/result/page/#(i)"> #(i) </a>
+	            #end            
+	        #elseif (current_page + 5 > total_page )
+	            #for(i=current_page-4; i < current_page;i++)
+	                <a href="/result/page/#(i)"> #(i) </a>
+	            #end
+	            
+	            <span class="current_page"> #(current_page) </span>
+	            
+	            #for(i= (current_page+1); i<= total_page; i++)
+	                <a href="/result/page/#(i)"> #(i) </a>
+	            #end            
+	        #else
+	            #for(i=current_page-4; i < current_page;i++)
+	                <a href="/result/page/#(i)"> #(i) </a>
+	            #end
+	            <span class="current_page"> #(current_page) </span>
+	            #for(i= (current_page+1); i<= current_page+5; i++)
+	                <a href="/result/page/#(i)"> #(i) </a>
+	            #end                       
+	        #end
+		#else
+				#for(i=1; i < current_page;i++)
+	                <a href="/result/page/#(i)"> #(i) </a>
+	            #end
+	            <span class="current_page"> #(current_page) </span>
+	            #for(i= (current_page+1); i<= total_page; i++)
+	                <a href="/result/page/#(i)"> #(i) </a>
+	            #end 
+		#end
 
             
         <!-- 处理下一页标签 -->
