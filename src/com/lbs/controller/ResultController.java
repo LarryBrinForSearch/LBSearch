@@ -39,6 +39,9 @@ public class ResultController  extends Controller{
 		case 6:
 			channel = "军事";
 			break;
+		case 7:
+			channel = null;
+			break;
 		
 		}
 		setAttr("channel",channel);
@@ -67,6 +70,9 @@ public class ResultController  extends Controller{
 			break;
 		case 6:
 			channel = "军事";
+			break;
+		case 7:
+			channel = null;
 			break;
 		
 		}
