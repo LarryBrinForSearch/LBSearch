@@ -1,30 +1,30 @@
+
 /* 页面/index/index.html的样式表 */
-#content{
-	search:0 auto;
-	height:70%;
+
+#search_text_index{ /* 首页的搜索栏 */
+	width:99%;
+	height:40px;
 }
-#lg{
-	margin-top:100px;
-	width:355px;
-	height:125px;
+#s_button_index{
+	height:40px;
+	text-align:center;
+	width:99%;
+	font-size:20px;
+	font-family:"times new roman", helvetica, sans-serif;
+
 }
-#form{
-	width:550px;
-}
-.tag{
-	margin:10px 0;
+.content{
+	margin-top:10%;
 }
 .footer{
-	top:90%;
+	width:100%;
+	height:80px;
+	margin-top:15%;
 }
 
-.center{
-	margin:0 auto;
-}
-.text_center{
-	text-align:center;
-}
+.footer p{text-align:center;margin:0;}
 
-.solid{
+.debug{
 	border:solid 1px;
+	
 }
