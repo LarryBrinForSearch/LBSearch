@@ -1,6 +1,7 @@
-@CHARSET "UTF-8";
+
  body{
- 	font-family:"Times New Roman"
+ 	font-family:"Times New Roman";
+
  }
 
 .result_title{
@@ -55,17 +56,24 @@
 
 .right_column{
 	width:39%;
-	min-height:200px;
-	float:right;
-	padding:0
+	min-height:300px;
+	height:100%;
+	padding:0;
+	position:fixed;
+	margin-left:60%;
+
 }
 .inner_right{
-
+	width:100%;
+	
+}
+h2{text-align:center;
+	font-weight:normal;
 }
 #main{
 	width:100%;
-	min-height:400px;
-	margin-top:3em;
+	min-height:300px;
+
 }
 .debug{
 	border:solid 1px;
