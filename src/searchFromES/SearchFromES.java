@@ -166,8 +166,7 @@ public class SearchFromES {
 			par.put("channel_name", (String)params.get("channel_name"));			//频道名称
 			par.put("website_name", (String)params.get("website_name"));			//网站来源名称
 			par.put("score", hits.getHits()[i].getScore()+"");						//匹配度
-			par.put("time", myresponse.getTook()+"");
-			
+	
 			JSONObject array = new JSONObject(par);
 			jsonArr.add(array);
 		}
@@ -175,7 +174,7 @@ public class SearchFromES {
 		System.out.println(hits.getHits().length);
 		System.out.println(myresponse.getTook());
 		
-		return new ResultModel(myresponse.getHits().getTotalHits(),jsonArr);
+		return new ResultModel(myresponse.getHits().getTotalHits(),jsonArr,myresponse.getTook()+"");
 	}
 	
 	
@@ -262,7 +261,7 @@ public class SearchFromES {
 			System.out.println(hits.getHits().length);
 			System.out.println(myresponse.getTook());
 			
-			return new ResultModel(myresponse.getHits().getTotalHits(),jsonArr);
+			return new ResultModel(myresponse.getHits().getTotalHits(),jsonArr,myresponse.getTook()+"");
 		}
 		
 		
@@ -507,7 +506,7 @@ public class SearchFromES {
 			System.out.println(hits.getHits().length);
 			System.out.println(myresponse.getTook());
 			
-			return new ResultModel(myresponse.getHits().getTotalHits(),jsonArr);
+			return new ResultModel(myresponse.getHits().getTotalHits(),jsonArr,myresponse.getTook()+"");
 		}
 	
 }

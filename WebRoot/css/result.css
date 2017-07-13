@@ -1,5 +1,7 @@
 @CHARSET "UTF-8";
-
+ body{
+ 	font-family:"Times New Roman"
+ }
 
 .result_title{
 	font-size:1.3em;
@@ -14,15 +16,29 @@
 }
 .label{font-size:.5em}
 #search{
-	width:80%;
 	margin:1em auto;
-	
 }
-.searchString{
-	width:80%;
-	height:2em;
+
+#search_text{ /* 搜索结果页面的搜索栏 */
+	width:99%;
+	height:40px;
 }
-.button{width:15%; height:2.3em;}
+#s_button{ /* 搜索结果页面搜索栏后面的提交按钮 */
+	height:40px;
+	text-align:center;
+	width:99%;
+	font-size:20px;
+	font-family:"times new roman", helvetica, sans-serif;
+	color:white;
+	background-color:blue;
+}
+.jf{ /* 搜索结果概况中插入的文字 */
+	margin:0 2px;
+	color:#8000ff;
+}
+#s_tb{
+	width:100%;
+}
 .inner_content{
 	margin-left:2em;
 	margin-top:1em;
