@@ -1,5 +1,7 @@
 package com.lbs.controller;
 
+import java.util.HashMap;
+
 import com.jfinal.core.Controller;
 import com.lbs.common.Config;
 
@@ -7,7 +9,7 @@ import lsmodel.ResultModel;
 import searchFromES.SearchFromES;
 
 public class ResultController  extends Controller{
-
+	private static HashMap<String,Long> map=null;
 	private static String searchString=null;
 	private static String channel=null;
 	private static int page_size = 15; // 每页显示15条搜索结果
@@ -78,7 +80,7 @@ public class ResultController  extends Controller{
 		}
 		setAttr("channel",channel);
 		ResultModel result = Config.sfs.multiQuery(searchString,channel,page_size);
-
+		setAttr("map",map);
 		setAttr("result", result);
 		setAttr("page_size", page_size);
 		setAttr("current_page", 1);
@@ -97,7 +99,8 @@ public class ResultController  extends Controller{
 			channel = null;
 		}
 		ResultModel result = Config.sfs.multiQuery(searchString,channel,page_size);
-
+		map = result.getStaMap();
+		setAttr("map",map);
 		setAttr("result", result);
 		setAttr("page_size", page_size);
 		setAttr("current_page", 1);
@@ -113,6 +116,7 @@ public class ResultController  extends Controller{
 		int i = getParaToInt(0);
 		System.out.println("page: string is \"" + searchString + "\"\n\t page is \"" + i);;
 		ResultModel result = Config.sfs.QueryLater(i, page_size, searchString, channel);
+		setAttr("map",map);
 		setAttr("result", result);
 		setAttr("page_size", page_size);
 		setAttr("current_page", i);
