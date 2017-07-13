@@ -11,9 +11,12 @@
         <form id="form" name=f action="/result/search" class="" >
              <table id="s_tb" border="0" align="center" >
              	<tr>
-
-             		<td colspan="8"><img hidefocus=true src="/img/head.png" class="center" width="350" height="129" /></td>
-             		<td>&nbsp;</td>
+             		<td colspan="6"><img hidefocus=true src="/img/head.png" class="center" width="350" height="129" /></td>
+             		#if(channel)
+             			<td  colspan="2"><img hidefocus=true src="/img/#(channel).png" class="right" width="40" height="40" /></td>
+             			<td>&nbsp;</td>
+             		#end
+             		<td colspan="3">&nbsp;</td>
              	</tr>
 	            <tr>
 	                <td colspan="7"><input id="search_text_index" type="text"  name="searchString" /><td>
@@ -28,7 +31,7 @@
 	                <td><a href="/result/setChannel/5">体育</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 	                <td><a href="/result/setChannel/6">军事</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 	                <td><a href="/result/setChannel/7">全部</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-	                <td colspan="2">&nbsp;</td>
+	                <td colspan="3">&nbsp;</td>
 	                
 	            </tr>
 	  
