@@ -5,6 +5,9 @@ public class IndexController extends Controller {
 	public void index(){
 		render("/index/index.html");
 	}
+	/*
+	 * 启动jfinal
+	 */
 	public static void main(String[] args) {
 		JFinal.start("WebRoot", 8888, "/", 5);
 	}

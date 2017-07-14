@@ -56,7 +56,6 @@
 
 .right_column{
 	width:39%;
-	min-height:300px;
 	height:100%;
 	padding:0;
 	position:fixed;
@@ -65,7 +64,6 @@
 }
 .inner_right{
 	width:100%;
-	
 }
 h2{text-align:center;
 	font-weight:normal;
