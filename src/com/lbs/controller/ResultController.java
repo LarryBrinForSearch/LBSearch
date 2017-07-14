@@ -9,9 +9,9 @@ import lsmodel.ResultModel;
 import searchFromES.SearchFromES;
 
 public class ResultController  extends Controller{
-	private static HashMap<String,Long> map=null;
-	private static String searchString=null;
-	private static String channel=null;
+	private static HashMap<String,Long> map=null;//类别及每类的数量
+	private static String searchString=null;//搜索字符串
+	private static String channel=null;//搜索频道
 	private static int page_size = 15; // 每页显示15条搜索结果
 	private static int list_size = 10; // 搜索结果可能
 	public void index(){
