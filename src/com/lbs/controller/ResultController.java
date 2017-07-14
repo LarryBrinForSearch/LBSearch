@@ -85,6 +85,7 @@ public class ResultController  extends Controller{
 		setAttr("page_size", page_size);
 		setAttr("current_page", 1);
 		setAttr("list_size",list_size);
+		setAttr("search_string",searchString);
 		System.out.println(result.getJsonArr().size());
 		render("result.html");
 	}
@@ -105,6 +106,7 @@ public class ResultController  extends Controller{
 		setAttr("page_size", page_size);
 		setAttr("current_page", 1);
 		setAttr("list_size",list_size);
+		setAttr("search_string",searchString);
 		System.out.println(result.getJsonArr().size());
 		render("result.html");
 	}

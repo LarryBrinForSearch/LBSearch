@@ -46,9 +46,18 @@
 
 			</form>
 		</div>
-		<p >本页<span class="jf">#(result.getJsonArr().size())</span> 条结果&nbsp;
-			共<span class="jf">#(result.getTotalHit())</span> 条结果&nbsp;
-			搜索用时<span class="jf">#(result.getTime())</span></p>
+		
+		
+		#set(total_hit=result.getTotalHit())
+		
+		#if(total_hit > 0)
+			<p >本页<span class="jf">#(result.getJsonArr().size())</span> 条结果&nbsp;
+				共<span class="jf">#(total_hit)</span> 条结果&nbsp;
+				搜索用时<span class="jf">#(result.getTime())</span></p>
+		#else
+			<h3>很抱歉，没有找到与"<span class="jf"> #(search_string)</span>"相关的网页。请换个关键词试试</h3>
+		#end
+		
 		#for(x : result.getJsonArr())
 		<div class="item">
 			<div style="text-align:left;" class="result_title" ><a href='#(x.get("url"))' target="_blank"> #(x.get("title")) </a></div>
