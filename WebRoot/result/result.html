@@ -220,7 +220,26 @@
                     colorLightness: [0, 1]
                 }
             },
-    };
+
+    
+                // 全局背景色
+                backgroundColor: '#63B8FF',
+                // 设置明暗度的变化,
+                // 通过 visualMap 组件将数值的大小映射到明暗度。
+                visualMap: {
+                    // 不显示 visualMap 组件，只用于明暗度的映射
+                    show: false,
+                    // 映射的最小值为 80
+                    min: 80,
+                    // 映射的最大值为 600
+                    max: 600,
+                    inRange: {
+                        // 明暗度的范围是 0 到 1
+                        colorLightness: [0, 1]
+                    }
+                },
+        };
+
 
     myChart.setOption(option);
 </script>
