@@ -9,13 +9,10 @@ public class StartReRunModel {
 
 	public static boolean reRun(String strStart, String strEnd) {
 		boolean flag = true;
-		String[] test = new String[] { "java", "-jar", "ReRun2.0.jar", strStart, strEnd };
+		String[] test = new String[] { "java", "-jar", "G:\\workspace\\Web\\ReRun2.0.jar", strStart, strEnd };
 		try {
-System.out.println("Runtime runtime = Runtime.getRuntime();");
 			Runtime runtime = Runtime.getRuntime();
-System.out.println("Process process = runtime.exec(test);");
 			Process process = runtime.exec(test);
-System.out.println("Process process = runtime.exec(test); success");
 			// 取得命令结果的输出流
 			InputStream fis = process.getInputStream();
 			// 用一个读输出流类去读
@@ -30,7 +27,6 @@ System.out.println("Process process = runtime.exec(test); success");
 			flag = false;
 			System.out.println("Error exec AnyQ");
 		}
-System.out.println("rerun from " + strStart + " to " + strEnd);
 		return flag;
 	}
 
