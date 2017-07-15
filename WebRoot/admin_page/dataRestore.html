@@ -75,22 +75,23 @@
                                     </div>
                                 </div>
                                 <div class="panel-body">
-                                    <form class="form-horizontal">
+                                    <form class="form-horizontal" action="../admin/restore">
                                         <div class="form-group">
                                             <label for="startInput" class="col-sm-2 control-label">起始时间</label>
                                             <div class="col-sm-10">
-                                                <input type="input" class="form-control" id="startInput" placeholder="起始时间">
+                                                <input type="input" class="form-control" id="startInput" name="startInput" placeholder="起始时间,如  2017-05-01">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="endInput" class="col-sm-2 control-label">终止时间</label>
                                             <div class="col-sm-10">
-                                                <input type="input" class="form-control" id="endInput" placeholder="终止时间">
+                                                <input type="input" class="form-control" id="endInput" name="endInput" placeholder="终止时间,如   2017-05-23">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-sm-offset-2 col-sm-10">
-                                                <button type="submit" class="btn btn-default">开始重跑</button>
+                                            	<input type="button" class="btn btn-default" value="开始重跑" onclick="validate()"/>
+                                                <!--<button class="btn btn-default" onclick="validate()" >开始重跑</button>-->
                                             </div>
                                         </div>
                                     </form>
@@ -156,6 +157,37 @@
 
     <!-- Custom Js -->
     <script src="assets/js/data_restore_custom.js"></script>
+    <script type="text/javascript">
+ // 检验崇拜跑起止日期的有效性
+    function validate() {
+        var start   =  document.forms[0].startInput.value; // 获取表单中userName输入域的值
+        var end    =  document.forms[0].endInput.value; // 获取表单中 输入域的值
+
+        var reg=/^[0-9]{4}-((0?[1-9])|(1[12]))-(([012]?[0-9])|(3[01]))$/;
+        if (start.length <= 0)       alert ("重跑开始时间不能为空！");
+        else if (!reg.test(start)) alert("开始时间格式不正确！");
+        else if(end.length <=0 )	alert("重跑结束时间不能为空！");
+        else if (!reg.test(end)) alert("结束时间格式格式不正确！");
+        else if(!validate_assit(start,end)) alert("开始时间不得晚于结束时间");
+        else {
+        	validate_assit(start,end)
+            document.forms[0].submit();
+        }
+    }
+ 	function validate_assit(start, end){
+ 		start_arr = start.split("-");
+ 		end_arr = end.split("-")
+ 		ok_flag = true;
+ 		for(i=0;i<3;i++){
+ 			if (Number(end_arr[i]) < Number(start_arr[i])){
+ 				ok_flag=false;
+ 				break;
+ 			}
+ 		}
+ 		return ok_flag;
+ 		
+ 	}
+    </script>
 
 
 </body>

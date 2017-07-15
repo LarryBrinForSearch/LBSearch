@@ -10,6 +10,10 @@ public class AdminController extends Controller {
 		render("/admin_page/dataMoniter.html");
 	}
 	public void restore(){
+		String start = getPara("startInput");
+		String end = getPara("endInput");
+		System.out.println("com.lbs.conroler.AdminContreller.restore:\n\t"+start+":"+end);
 		render("/admin_page/dataRestore.html");
 	}
+
 }
