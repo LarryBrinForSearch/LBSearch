@@ -1,0 +1,7 @@
+@CHARSET "UTF-8";
+.center-block{
+	width:300px;
+	height:200px;
+	margin-right:-150px;
+	margin-bottom:-100px;
+}

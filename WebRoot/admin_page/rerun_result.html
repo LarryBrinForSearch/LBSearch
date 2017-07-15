@@ -8,22 +8,27 @@
         <meta content="webthemez" name="author" />
         <base href="/admin_page/"> 
         <title>LBSearch管理控制台</title>
- 
+         <!-- Custom Styles-->
+        <link href="assets/css/rerun_result.css" rel="stylesheet" type="text/css" />
          <!-- Google Fonts-->
         <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 
 </head>
 <body>
-	<h1 class="">
-		数据重跑 结果<small>Data Restore Result</small>
-	</h1>
-	
-	
-	#if (info)
-	    <div class="">#(timestamp)</div>
-	
-	    <div>#(info)</div>
-	    <a href="../admin/restore">点击返回控制台</a>
-	#end
+	<div class="center-block">
+		<h1 class="">
+			数据重跑 结果<small>Data Restore Result</small>
+		</h1>
+		
+		#if (info)
+		    <div class="">#(timestamp)</div>
+		
+		    <div>#(info)</div>
+		    <a href="../admin/restore">点击返回控制台</a>
+		#else
+			
+		#end
+	</div>
+
 </body>
 </html>
