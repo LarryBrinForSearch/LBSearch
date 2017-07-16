@@ -44,11 +44,24 @@ static Connection con=null;
 			}
 		}		
 	}
-	public static int countTime(String start,String end) throws SQLException{
+	private static int countTime(String start,String end) throws SQLException{
 		String sql=" select count(*) from website where unix_timestamp(crawler_time)>unix_timestamp(?) and unix_timestamp(crawler_time)<unix_timestamp(?);";
 		PreparedStatement pst=con.prepareStatement(sql);
 		pst.setString(1, start);
 		pst.setString(2, end);
+		ResultSet rst=pst.executeQuery();
+		rst.next();
+		int result=rst.getInt(1);
+		return result;
+	}
+	
+	private static int countTimeWithWBName(String start,String end,String wbname) throws SQLException{
+		String sql=" select count(*) from website where unix_timestamp(crawler_time)>unix_timestamp(?) and unix_timestamp(crawler_time)<unix_timestamp(?)"
+				+ "and website_name=?;";
+		PreparedStatement pst=con.prepareStatement(sql);
+		pst.setString(1, start);
+		pst.setString(2, end);
+		pst.setString(3, wbname);
 		ResultSet rst=pst.executeQuery();
 		rst.next();
 		int result=rst.getInt(1);
@@ -89,6 +102,41 @@ static Connection con=null;
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+		CountByDate.cutDownCon();
+		return rst;
+	}
+	
+	public static Map<String,Integer> getCountResultByDay(int startM,int startD,int endM,int endD,String wbname){
+		int month = startM;
+		int day	=startD;
+		ArrayList<String> times=new ArrayList<String>();//生成日期串
+		while(true){
+				if((month==5 && day ==32)||(month == 6 && day == 31)){
+					day=1;
+					month++;
+				}
+			day++;
+			String tm = String.format("2017-%02d-%02d 00:00:00", month,day);
+			if(month==endM && day == endD ){
+				break;
+			}
+			times.add(tm);
+		}//end while
+		CountByDate.connectDB();	//连接数据库
+		Map<String,Integer> rst=new HashMap<String,Integer>();
+		
+		for(int i=0;i<times.size()-1;i++){
+			String start=times.get(i);
+			String end=times.get(i+1);
+			try {
+				int ct=CountByDate.countTimeWithWBName(start,end,wbname);
+				rst.put(start, ct);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println(start+'\t'+end);
 		}
 		CountByDate.cutDownCon();
 		return rst;
