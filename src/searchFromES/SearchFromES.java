@@ -288,7 +288,7 @@ public class SearchFromES {
 	 * 此方法为聚合查询，查詢的是當前所有文檔 輸出結果按照aggField聚合并排序
 	 */
 
-	public static void aggSearch(String aggField) {
+	public static Map aggSearch(String aggField) {
 
 		SearchRequestBuilder sbuilder = client.prepareSearch("lbsearch").setTypes("website");
 		
@@ -305,18 +305,17 @@ public class SearchFromES {
 		Iterator<org.elasticsearch.search.aggregations.bucket.terms.Terms.Bucket> teamBucketIt = ((InternalTerms<StringTerms, Bucket>) Aggteam).getBuckets()
 				.iterator();
 
-		int sum = 0;
-
+		Map<String,Integer> result=new HashMap<String,Integer>();
+		
 		while (teamBucketIt.hasNext()) {
 			org.elasticsearch.search.aggregations.bucket.terms.Terms.Bucket buck = teamBucketIt.next();
 			// 文章类型名
 			String article = (String) buck.getKey();
 			// 记录数
 			long counts = buck.getDocCount();
-			System.out.println("文章类型：" + article + "\t" + "文章数量：" + counts);
-			sum += counts;
+			result.put(article, (int)counts);
 		}
-		System.out.println(sum + "!");
+		return result;
 	}
 
 	/*
