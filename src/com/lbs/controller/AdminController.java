@@ -1,16 +1,36 @@
 package com.lbs.controller;
 
 import java.util.Date;
+import java.util.Map;
+import java.util.HashMap;
 
 import com.jfinal.core.Controller;
 
 import lsmodel.StartReRunModel;
+import searchFromES.CountByDate;
+import searchFromES.SearchFromES;
 
 public class AdminController extends Controller {
 	public void index(){
-		render("/admin_page/dataMoniter.html");
+		moniter();
 	}
 	public void moniter(){
+		// 折线图数据，用一个Map对象line_chart_data传递，
+		// 对象line_chart_data的键和值分别是一个map对象，
+		// 对象line_chart_data 值是map对象，一个值包含了一个站点数据采集量
+		Map<String,Map<String,Integer>> line_chart_data = 
+				new HashMap< String,Map<String, Integer>>();
+		String sites[] = {"新浪网","百度网"};
+		String [] yKeys = {"a", "b", "c", "d", "e", "f", "g", 
+				"h", "i", "j", "k", "l", "m", "n", 
+				"o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", };
+		for(String site:sites){
+			line_chart_data.put(site,CountByDate.getCountResultByDay(7,1,7,17,site));
+		}
+
+		setAttr("data_line_chart",line_chart_data);
+		setAttr("hello","hello");
+		setAttr("yKeys",yKeys);
 		render("/admin_page/dataMoniter.html");
 	}
 	public void restore(){
