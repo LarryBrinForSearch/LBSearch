@@ -1,13 +1,15 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+
+
 <head>
 	<meta charset="UTF-8">
 	<title>larrybrin for search</title>
-	<base href="/">
-	<link rel="stylesheet" type="text/css" href="css/result.css">
-	<link rel="shortcut icon" href="img/button.png" />
-	<script type="text/javascript" src="js/echarts.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="css/pie.css">
+
+	<link rel="stylesheet" type="text/css" href="/css/result.css">
+	<link rel="shortcut icon" href="/img/button.png" />
+	<script type="text/javascript" src="/js/echarts.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/css/pie.css">
 </head>
 <body>
 	<div class="right_column  " >
@@ -22,7 +24,7 @@
 	<div class="main_content">
 	<div class="inner_content">
 		<div id="search" class="">
-			<form id="form" name=f action="result/search" class="" >
+			<form id="form" name=f action="/result/search" class="" >
 
 				 <table id="s_tb" border="0" align="center" >
 				 <tr>
@@ -32,13 +34,13 @@
 	
 					<input type="hidden" name="channel" value=#(channel)  />
 				<tr id="tag">
-					<td><a href="result/setChannel2/1">财经</a></td>
-					<td><a href="result/setChannel2/2">国际</a></td>
-					<td><a href="result/setChannel2/3">股票</a></td>
-					<td><a href="result/setChannel2/4">新闻</a></td>
-					<td><a href="result/setChannel2/5">体育</a></td>
-					<td><a href="result/setChannel2/6">军事</a></td>
-					<td><a href="result/setChannel2/7">全部</a></td>
+					<td><a href="/result/setChannel2/1">财经</a></td>
+					<td><a href="/result/setChannel2/2">国际</a></td>
+					<td><a href="/result/setChannel2/3">股票</a></td>
+					<td><a href="/result/setChannel2/4">新闻</a></td>
+					<td><a href="/result/setChannel2/5">体育</a></td>
+					<td><a href="/result/setChannel2/6">军事</a></td>
+					<td><a href="/result/setChannel2/7">全部</a></td>
 					<td colspan="2">&nbsp;</td>
 				</tr>
 
@@ -89,47 +91,47 @@
 			#if (total_page >= list_size)
 		        #if (current_page < 5)   <!--  -->
 		            #for(i=1; i < current_page;i++)
-		                <a href="result/page/#(i)" class="paging_item"> #(i) </a>
+		                <a href="/result/page/#(i)" class="paging_item"> #(i) </a>
 		            #end
 		            
 		            <span class="current_page" class="paging_item"> #(current_page) </span>
 		            
 		            #for(i= (current_page+1); i<= list_size; i++)
-		                <a href="result/page/#(i)" class="paging_item"> #(i) </a>
+		                <a href="/result/page/#(i)" class="paging_item"> #(i) </a>
 		            #end            
 		        #elseif (current_page + 5 > total_page )
 		            #for(i=current_page-4; i < current_page;i++)
-		                <a href="result/page/#(i)" class="paging_item"> #(i) </a>
+		                <a href="/result/page/#(i)" class="paging_item"> #(i) </a>
 		            #end
 		            
 		            <span class="current_page" > #(current_page) </span>
 		            
 		            #for(i= (current_page+1); i<= total_page; i++)
-		                <a href="result/page/#(i)" class="paging_item" > #(i) </a>
+		                <a href="/result/page/#(i)" class="paging_item" > #(i) </a>
 		            #end            
 		        #else
 		            #for(i=current_page-4; i < current_page;i++)
-		                <a href="result/page/#(i)" class="paging_item" > #(i) </a>
+		                <a href="/result/page/#(i)" class="paging_item" > #(i) </a>
 		            #end
 		            <span class="current_page" class="paging_item" > #(current_page) </span>
 		            #for(i= (current_page+1); i<= current_page+5; i++)
-		                <a href="result/page/#(i)" class="paging_item" > #(i) </a>
+		                <a href="/result/page/#(i)" class="paging_item" > #(i) </a>
 		            #end                       
 		        #end
 			#else
 					#for(i=1; i < current_page;i++)
-		                <a href="result/page/#(i)" class="paging_item"> #(i) </a>
+		                <a href="/result/page/#(i)" class="paging_item"> #(i) </a>
 		            #end
 		            <span class="current_page"> #(current_page) </span>
 		            #for(i= (current_page+1); i<= total_page; i++)
-		                <a href="result/page/#(i)" class="paging_item" > #(i) </a>
+		                <a href="/result/page/#(i)" class="paging_item" > #(i) </a>
 		            #end 
 			#end
 					
 	            
 	        <!-- 处理下一页标签 -->
 	        #if (current_page < total_page)
-	        	<span class="next_page"><a href="result/page/#(current_page+1)">下一页</a></span>
+	        	<span class="next_page"><a href="/result/page/#(current_page+1)">下一页</a></span>
 	        #else
 	        	<span class="next_page">下一页 </span> 
 	        #end
