@@ -1,5 +1,4 @@
-﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="utf-8" />
@@ -65,23 +64,7 @@
             </div>
             <div id="page-inner">
 
-                <!-- /. ROW  -->
-			 <pre class="row">
-				#if (data_line_chart)
-          			#(data_line_chart.toString())
-                    #(data_line_chart.keySet()) <br/>
-                    #((data_line_chart.keySet()).toArray())
-                   
-	          	#else
-	          		no data fonund! <br/>
-	          	#end
-	          	ykeys:
-	          	#(yKeys[0])   
-	          	     
-	  
-
-	          	
-        	</pre>
+        	
 				<div class="row">
 					<div class="col-md-12">
 						<div class="panel panel-default">
@@ -266,29 +249,57 @@
                         element: 'morris-line-chart',
                         
                         	#if(data_line_chart)
-                        		#set (count=0)
-
+								###填充站点名数组
+							 	#set (count = 0)
+					  			#for(site_name:data_line_chart.keySet())
+					  				#set (array[count] = site_name)
+					  				#set(count=count+1)
+					  			#end
+					  			#set(total_site=count)
+					  			
+								###时间线
+								#set(time_line=(data_line_chart[array[0]]).keySet())
+					  			
                         		data:[
-                        		#for(site_name:data_line_chart.keySet())
-                            		#set (yKey = yKeys[count])
-                            		#set (count=count+1)
-                        			#set (one_site=data_line_chart.get(site_name))
-                        			#for(time_stamp:one_site.keySet())
-                        				{y:'#(time_stamp)',#(yKey):#(one_site.get(time_stamp))},
-                        			#end
                         			
-                        		#end
+                        			#for(time_stamp:time_line)
+                        				### { y: '2015', a: 165,  b: 185},
+        								#for(time_stamp:time_line)
+                            				### { y: '2015', a: 165,  b: 185},
+                            				{y:'#(time_stamp)',
+                            					#for(i=0;i<(count);i++)
+                            						#(yKeys[i]):#(data_line_chart[array[i]][time_stamp]),
+                            					#end
+                            				},
+    				
+                            		#end
+				
+                        			
+                        			#end
+
                         		],
 
-
                                     xkey: 'y',
-                                    ykeys: ['a', 'b'],
-                                    labels: ['新浪网', 'Total Outcome'],
+                                    ###ykeys: ['a', 'b'],
+                                    ykeys:[
+                                    	#for(i=0;i<(count);i++)
+                                    		'#(yKeys[i])',
+                                    	#end
+                                    ],
+                                    ###labels: ['新浪网', 'Total Outcome'],
+                                    labels:[
+                                    	#for(i=0;i<(count);i++)
+                                    		'#(array[i])',
+                                    	#end
+                                    ],	
                                     
+                                    lineColors:['green','#00a','#0aa','#a00','#a0a','#aa0',
+                                    					'#00d','#0d0','#0dd','#d00','#d0d',
+                                    					'#dd0','#ddd','#aad','#ada','#add',
+                                    					'#daa','#dad','#dda'],
                         	#else
                         	data: [
-                              { y: '2014', a: 50},
-                              { y: '2014',  b: 190},
+                            
                               { y: '2015', a: 165,  b: 185},
                               { y: '2016', a: 150,  b: 130},
                               { y: '2017', a: 175,  b: 160},
@@ -303,7 +314,7 @@
                               xkey: 'y',
                               ykeys: ['a', 'b'],
                               labels: ['Total Income', 'Total Outcome'],
-                              
+                              lineColors:['green','#1abc9c']
                             #end
                             
                             fillOpacity: 0.6,
@@ -312,7 +323,7 @@
                             resize: true,
                             pointFillColors:['#ffffff'],
                             pointStrokeColors: ['black'],
-                            lineColors:['gray','#1abc9c']
+                            
 
                     });
 

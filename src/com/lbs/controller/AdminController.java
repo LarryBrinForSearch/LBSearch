@@ -27,10 +27,12 @@ public class AdminController extends Controller {
 		for(String site:sites){
 			line_chart_data.put(site,CountByDate.getCountResultByDay(7,1,7,17,site));
 		}
+		
 
 		setAttr("data_line_chart",line_chart_data);
 		setAttr("hello","hello");
 		setAttr("yKeys",yKeys);
+		setAttr("array",new String[26]);
 		render("/admin_page/dataMoniter.html");
 	}
 	public void restore(){
