@@ -89,40 +89,40 @@
 			#if (total_page >= list_size)
 		        #if (current_page < 5)   <!--  -->
 		            #for(i=1; i < current_page;i++)
-		                <a href="result/page/#(i)"> #(i) </a>
+		                <a href="result/page/#(i)" class="paging_item"> #(i) </a>
 		            #end
 		            
-		            <span class="current_page"> #(current_page) </span>
+		            <span class="current_page" class="paging_item"> #(current_page) </span>
 		            
 		            #for(i= (current_page+1); i<= list_size; i++)
-		                <a href="result/page/#(i)"> #(i) </a>
+		                <a href="result/page/#(i)" class="paging_item"> #(i) </a>
 		            #end            
 		        #elseif (current_page + 5 > total_page )
 		            #for(i=current_page-4; i < current_page;i++)
-		                <a href="result/page/#(i)"> #(i) </a>
+		                <a href="result/page/#(i)" class="paging_item"> #(i) </a>
 		            #end
 		            
-		            <span class="current_page"> #(current_page) </span>
+		            <span class="current_page" > #(current_page) </span>
 		            
 		            #for(i= (current_page+1); i<= total_page; i++)
-		                <a href="result/page/#(i)"> #(i) </a>
+		                <a href="result/page/#(i)" class="paging_item" > #(i) </a>
 		            #end            
 		        #else
 		            #for(i=current_page-4; i < current_page;i++)
-		                <a href="result/page/#(i)"> #(i) </a>
+		                <a href="result/page/#(i)" class="paging_item" > #(i) </a>
 		            #end
-		            <span class="current_page"> #(current_page) </span>
+		            <span class="current_page" class="paging_item" > #(current_page) </span>
 		            #for(i= (current_page+1); i<= current_page+5; i++)
-		                <a href="result/page/#(i)"> #(i) </a>
+		                <a href="result/page/#(i)" class="paging_item" > #(i) </a>
 		            #end                       
 		        #end
 			#else
 					#for(i=1; i < current_page;i++)
-		                <a href="result/page/#(i)"> #(i) </a>
+		                <a href="result/page/#(i)" class="paging_item"> #(i) </a>
 		            #end
 		            <span class="current_page"> #(current_page) </span>
 		            #for(i= (current_page+1); i<= total_page; i++)
-		                <a href="result/page/#(i)"> #(i) </a>
+		                <a href="result/page/#(i)" class="paging_item" > #(i) </a>
 		            #end 
 			#end
 					
