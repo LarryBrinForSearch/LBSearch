@@ -1,14 +1,9 @@
-
- body{
- 	font-family:"Times New Roman";
-
- }
-
+@import url("common.css");
 .result_title{
-	font-size:1.3em;
+	font-size:1.0em;
 }
 .result_content{
-	font-size: 1em;
+	font-size: 0.8em;
 	padding:5px, auto;
 	margin:.5em 1em;
 	line-height:1.3em;
@@ -78,4 +73,20 @@ h2{text-align:center;
 }
 .debug2{
 	border:solid 1px red;
+}
+
+/* 分页链接样式 */
+.paging{
+	margin:20px 0;
+	font-size:1.1em;
+}
+.paging a:link{			/* 超链接未点击时的样式 */
+	text-decoration:none; /* 取消超链接默认的下划线修饰 */
+}
+.paging a:visited{
+	color:purple;
+}
+.paging a:hover{
+	text-decoration:underline; 
+
 }
