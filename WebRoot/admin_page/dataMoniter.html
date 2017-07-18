@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta content="" name="description" />
+    <meta content="" name="description" />
     <meta content="webthemez" name="author" />
     <title>LBSearch管理控制台</title>
 
@@ -33,9 +33,9 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="dataRestore.html"><strong>LBSearch</strong></a>
-        		<div id="sideNav" href="">
+                <div id="sideNav" href="">
                     <i class="fa fa-bars icon"></i>
-        		</div>
+                </div>
             </div>
         </nav>
         <!--/. NAV TOP  -->
@@ -44,10 +44,10 @@
                 <ul class="nav" id="main-menu">
 
                     <li>
-                        <a class="active-menu" href="/admin/moniter"><i class="fa fa-dashboard"></i> ES集群数据监视</a>
+                        <a class="active-menu" href="/admin_page/admin/moniter"><i class="fa fa-dashboard"></i> ES集群数据监视</a>
                     </li>
                     <li>
-                        <a href="/admin/restore"><i class="fa fa-desktop"></i> 数据重跑</a>
+                        <a href="/admin_page/admin/restore"><i class="fa fa-desktop"></i> 数据重跑</a>
                     </li>
                 </ul>
 
@@ -57,30 +57,46 @@
         <!-- /. NAV SIDE  -->
 
 
-		<div id="page-wrapper">
+        <div id="page-wrapper">
             <div class="header">
                 <h1 class="page-header">
-                    	数据监视<small>Data Monitor</small>
+                        数据监视<small>Data Monitor</small>
                 </h1>
             </div>
             <div id="page-inner">
 
-        	
-				<div class="row">
-					<div class="col-md-12">
-						<div class="panel panel-default">
-							<div class="panel-heading">
-									Line Chart
-							</div>
-							<div class="panel-body">
-								<div id="morris-line-chart"></div>
-							</div>
-						</div>
-					</div>
+				<pre class = "row">
+					#if(data_by_web_site)
+						
+						#(data_by_web_site)
+						#for(site_name:data_by_web_site.keySet())
+							key:#(site_name);;;value:#(data_by_web_site.get(site_name))
+						#end
+					#else
+						no data_by_site
+					#end
+					#if(data_by_channel)
+						#(data_by_channel)
+					#else
+						no data_by_channel
+					#end					
+				</pre>
 
-				</div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                    Line Chart
+                            </div>
+                            <div class="panel-body">
+                                <div id="morris-line-chart"></div>
+                            </div>
+                        </div>
+                    </div>
 
-				<div class="row">
+                </div>
+
+                <div class="row">
                     <div class="col-md-6 col-sm-12 col-xs-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
@@ -101,41 +117,41 @@
                             </div>
                         </div>
                     </div>
-				</div>
-				<div class="row">
+                </div>
+                <div class="row">
 
-					<div class="col-md-6">
-						<div class="panel panel-default">
-							<div class="panel-heading">
-		                       Bar Chart Example
-		                    </div>
-		                    <div class="panel-body">
-		                        <div id="morris-bar-chart"></div>
-		                    </div>
+                    <div class="col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                               Bar Chart Example
+                            </div>
+                            <div class="panel-body">
+                                <div id="morris-bar-chart"></div>
+                            </div>
 
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="panel panel-default">
-							<div class="panel-heading">
-		                       Bar Chart Example
-		                    </div>
-		                    <div class="panel-body">
-		                        <div id=""></div>
-		                    </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                               Bar Chart Example
+                            </div>
+                            <div class="panel-body">
+                                <div id=""></div>
+                            </div>
 
-						</div>
-					</div>
-				</div>
+                        </div>
+                    </div>
+                </div>
 
-		        <!-- /. ROW  -->
+                <!-- /. ROW  -->
 
-				<footer>
+                <footer>
                     <p class="cpr">
                         Copyright &copy; 2017 <a href="http://www.sc.sdu.edu.cn/" target="_blank">山东大学软件学院</a>
                         All rights reserved.<a target="_blank" href="http://www.LarryBrin.com/">LarryBrin for search</a>
                     </p>
-				</footer>
+                </footer>
             </div>
             <!-- /. PAGE INNER  -->
         </div>
@@ -154,7 +170,7 @@
     <script src="/admin_page/assets/js/morris/raphael-2.1.0.min.js"></script>
     <script src="/admin_page/assets/js/morris/morris.js"></script>
 
-	 <script src="/admin_page/assets/js/Lightweight-Chart/jquery.chart.js"></script>
+     <script src="/admin_page/assets/js/Lightweight-Chart/jquery.chart.js"></script>
 
     <!-- Custom Js -->
     <script type="text/javascript">
@@ -183,42 +199,32 @@
                     -----------------------------------------*/
                     Morris.Bar({
                         element: 'morris-bar-chart',
-                        data: [{
-                            y: '2003',
-                            a: 100,
-                            b: 90
-                        }, {
-                            y: '2007',
-                            a: 75,
-                            b: 65
-                        }, {
-                            y: '2008',
-                            a: 50,
-                            b: 40
-                        }, {
-                            y: '2009',
-                            a: 75,
-                            b: 65
-                        }, {
-                            y: '2010',
-                            a: 50,
-                            b: 40
-                        }, {
-                            y: '2011',
-                            a: 75,
-                            b: 65
-                        }, {
-                            y: '2012',
-                            a: 100,
-                            b: 90
-                        }],
-                        xkey: 'y',
-                        ykeys: ['a', 'b'],
-                        labels: ['Series A', 'Series B'],
-                         barColors: [
-                        '#22a7f0','#1abc9c',
-                        '#A8E9DC'
-                      ],
+                        #if(data_by_web_site)
+							
+							data:[
+							#for(site_name:data_by_web_site.keySet())
+								{y:'#(site_name)',a:#(data_by_web_site.get(site_name))},
+							#end
+							],
+							xkey: 'y',
+							ykeys: ['a'],
+							labels: ['数据采集总量'],             
+                        #else
+                            data:[  {y: '2003', a: 100, b: 90},
+                                {y: '2007', a: 75, b: 65},
+                                {y: '2008', a: 50, b: 40},
+                                {y: '2009', a: 75, b: 65},
+                                {y: '2010', a: 50, b: 40},
+                                {y: '2011', a: 75, b: 65},
+                                {y: '2012', a: 100, b: 90}],
+
+	                        xkey: 'y',
+	                        ykeys: ['a', 'b'],
+	                        labels: ['Series A'],             
+                        	
+                        #end
+
+                        barColors: ['#22a7f0','#1abc9c',],
                         hideHover: 'auto',
                         resize: true
                     });
@@ -239,7 +245,10 @@
                         }],
                            colors: [
                             '#22a7f0','#1abc9c',
-                            '#A8E9DC'
+                            '#A8E9DC','#00a','#0aa','#a00','#a0a','#aa0',
+                            '#00d','#0d0','#0dd','#d00','#d0d',
+                            '#dd0','#ddd','#aad','#ada','#add',
+                            '#daa','#dad','#dda'
                           ],
                         resize: true
                     });
@@ -248,59 +257,59 @@
                     ----------------------------------------*/
                     Morris.Line({
                         element: 'morris-line-chart',
-                        
-                        	#if(data_line_chart)
-								###填充站点名数组
-							 	#set (count = 0)
-					  			#for(site_name:data_line_chart.keySet())
-					  				#set (array[count] = site_name)
-					  				#set(count=count+1)
-					  			#end
-					  			#set(total_site=count)
-					  			
-								###时间线
-								#set(time_line=(data_line_chart[array[0]]).keySet())
-					  			
-                        		data:[
-                        			
-                        			#for(time_stamp:time_line)
-                        				### { y: '2015', a: 165,  b: 185},
-        								#for(time_stamp:time_line)
-                            				### { y: '2015', a: 165,  b: 185},
-                            				{y:'#(time_stamp)',
-                            					#for(i=0;i<(count);i++)
-                            						#(yKeys[i]):#(data_line_chart[array[i]][time_stamp]),
-                            					#end
-                            				},
-    				
-                            		#end
-				
-                        			
-                        			#end
 
-                        		],
+                            #if(data_line_chart)
+                                ###填充站点名数组
+                                #set (count = 0)
+                                #for(site_name:data_line_chart.keySet())
+                                    #set (array[count] = site_name)
+                                    #set(count=count+1)
+                                #end
+                                #set(total_site=count)
+
+                                ###时间线
+                                #set(time_line=(data_line_chart[array[0]]).keySet())
+
+                                data:[
+
+                                    #for(time_stamp:time_line)
+                                        ### { y: '2015', a: 165,  b: 185},
+                                        #for(time_stamp:time_line)
+                                            ### { y: '2015', a: 165,  b: 185},
+                                            {y:'#(time_stamp)',
+                                                #for(i=0;i<(count);i++)
+                                                    #(yKeys[i]):#(data_line_chart[array[i]][time_stamp]),
+                                                #end
+                                            },
+
+                                    #end
+
+
+                                    #end
+
+                                ],
 
                                     xkey: 'y',
                                     ###ykeys: ['a', 'b'],
                                     ykeys:[
-                                    	#for(i=0;i<(count);i++)
-                                    		'#(yKeys[i])',
-                                    	#end
+                                        #for(i=0;i<(count);i++)
+                                            '#(yKeys[i])',
+                                        #end
                                     ],
                                     ###labels: ['新浪网', 'Total Outcome'],
                                     labels:[
-                                    	#for(i=0;i<(count);i++)
-                                    		'#(array[i])',
-                                    	#end
-                                    ],	
-                                    
+                                        #for(i=0;i<(count);i++)
+                                            '#(array[i])',
+                                        #end
+                                    ],
+
                                     lineColors:['green','#00a','#0aa','#a00','#a0a','#aa0',
-                                    					'#00d','#0d0','#0dd','#d00','#d0d',
-                                    					'#dd0','#ddd','#aad','#ada','#add',
-                                    					'#daa','#dad','#dda'],
-                        	#else
-                        	data: [
-                            
+                                                        '#00d','#0d0','#0dd','#d00','#d0d',
+                                                        '#dd0','#ddd','#aad','#ada','#add',
+                                                        '#daa','#dad','#dda'],
+                            #else
+                            data: [
+
                               { y: '2015', a: 165,  b: 185},
                               { y: '2016', a: 150,  b: 130},
                               { y: '2017', a: 175,  b: 160},
@@ -317,14 +326,14 @@
                               labels: ['Total Income', 'Total Outcome'],
                               lineColors:['green','#1abc9c']
                             #end
-                            
+
                             fillOpacity: 0.6,
                             hideHover: 'auto',
                             behaveLikeLine: true,
                             resize: true,
                             pointFillColors:['#ffffff'],
                             pointStrokeColors: ['black'],
-                            
+
 
                     });
 
