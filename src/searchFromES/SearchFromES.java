@@ -61,7 +61,7 @@ public class SearchFromES {
 	
 	
 	public static void queryWithString(String target) {
-		SearchRequestBuilder responsebuilder = client.prepareSearch("crawler").setTypes("website");
+		SearchRequestBuilder responsebuilder = client.prepareSearch("larrybrin").setTypes("website");
 		SearchResponse myresponse = responsebuilder.setQuery(QueryBuilders.matchPhraseQuery("title", target)).setFrom(0)
 				.setSize(10).setExplain(true).execute().actionGet();
 		SearchHits hits = myresponse.getHits();
@@ -75,7 +75,7 @@ public class SearchFromES {
 	 * match实现的多字段查询：在标题和正文中若出现目标字符串都将会匹配
 	 */
 	public static void Query(String target) {
-		SearchRequestBuilder responsebuilder = client.prepareSearch("crawler").setTypes("website");
+		SearchRequestBuilder responsebuilder = client.prepareSearch("larrybrin").setTypes("website");
 		SearchResponse myresponse = responsebuilder.setQuery(
 				QueryBuilders.multiMatchQuery(target, "title", "content"))
 				.setFrom(200)
@@ -96,7 +96,7 @@ public class SearchFromES {
 		
 		//构建搜索请求
 		//索引为lbsearch，类型为website
-		SearchRequestBuilder responsebuilder = client.prepareSearch("lbsearch").setTypes("website");
+		SearchRequestBuilder responsebuilder = client.prepareSearch("larrybrin").setTypes("website");
 
 		if (channel_name !=null)
 		{
@@ -183,7 +183,7 @@ public class SearchFromES {
 			
 			//构建搜索请求
 			//索引为lbsearch，类型为website
-			SearchRequestBuilder responsebuilder = client.prepareSearch("lbsearch").setTypes("website");
+			SearchRequestBuilder responsebuilder = client.prepareSearch("larrybrin").setTypes("website");
 			
 			if (channel_name !=null)
 			{
@@ -269,7 +269,7 @@ public class SearchFromES {
 	 * 模糊查询
 	 */
 	public static void fuzzyQuery(String target) {
-		SearchRequestBuilder responsebuilder = client.prepareSearch("crawler").setTypes("website");
+		SearchRequestBuilder responsebuilder = client.prepareSearch("larrybrin").setTypes("website");
 		SearchResponse myresponse = responsebuilder.setQuery(
 				QueryBuilders.fuzzyQuery("title", target))
 				.setFrom(1)
@@ -290,7 +290,7 @@ public class SearchFromES {
 
 	public static Map aggSearch(String aggField) {
 
-		SearchRequestBuilder sbuilder = client.prepareSearch("lbsearch").setTypes("website");
+		SearchRequestBuilder sbuilder = client.prepareSearch("larrybrin").setTypes("website");
 		
 		TermsBuilder teamAgg = AggregationBuilders.terms("count").field(aggField).size(100);
 		sbuilder.addAggregation(teamAgg);
@@ -328,7 +328,7 @@ public class SearchFromES {
 		String scondition = channel_name == null ? "" : channel_name;
 
 		// 构造搜索请求
-		SearchRequestBuilder sbuilder = client.prepareSearch("lbsearch").setTypes("website");
+		SearchRequestBuilder sbuilder = client.prepareSearch("larrybrin").setTypes("website");
 
 		// 构造聚合条件。等价于group by channel_name
 		TermsBuilder teamAgg = AggregationBuilders.terms("count").field("channel_name").size(20);
@@ -427,7 +427,7 @@ public class SearchFromES {
 			
 			//构建搜索请求
 			//索引为lbsearch，类型为website
-			SearchRequestBuilder responsebuilder = client.prepareSearch("lbsearch").setTypes("website");
+			SearchRequestBuilder responsebuilder = client.prepareSearch("larrybrin").setTypes("website");
 			
 			// 构造聚合条件。等价于group by channel_name
 			TermsBuilder teamAgg = AggregationBuilders.terms("count").field("channel_name").size(20);
