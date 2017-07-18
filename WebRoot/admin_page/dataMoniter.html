@@ -1,22 +1,22 @@
-﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
 
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta content="" name="description" />
+    <meta content="" name="description" />
     <meta content="webthemez" name="author" />
     <title>LBSearch管理控制台</title>
-    <base href="/admin_page/">
+
     <!-- Bootstrap Styles-->
-    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <link href="/admin_page/assets/css/bootstrap.css" rel="stylesheet" />
     <!-- FontAwesome Styles-->
-    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+    <link href="/admin_page/assets/css/font-awesome.css" rel="stylesheet" />
     <!-- Morris Chart Styles-->
-    <link href="assets/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
+    <link href="/admin_page/assets/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
     <!-- Custom Styles-->
-    <link href="assets/css/custom-styles.css" rel="stylesheet" />
-    <link href="assets/css/custom-style2.css" rel="stylesheet" type="text/css" />
+    <link href="/admin_page/assets/css/custom-styles.css" rel="stylesheet" />
+    <link href="/admin_page/assets/css/custom-style2.css" rel="stylesheet" type="text/css" />
     <!-- Google Fonts-->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     <link rel="stylesheet" href="assets/js/Lightweight-Chart/cssCharts.css">
@@ -33,9 +33,9 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="dataRestore.html"><strong>LBSearch</strong></a>
-        		<div id="sideNav" href="">
+                <div id="sideNav" href="">
                     <i class="fa fa-bars icon"></i>
-        		</div>
+                </div>
             </div>
         </nav>
         <!--/. NAV TOP  -->
@@ -44,10 +44,10 @@
                 <ul class="nav" id="main-menu">
 
                     <li>
-                        <a class="active-menu" href="../admin/moniter"><i class="fa fa-dashboard"></i> ES集群数据监视</a>
+                        <a class="active-menu" href="/admin_page/admin/moniter"><i class="fa fa-dashboard"></i> ES集群数据监视</a>
                     </li>
                     <li>
-                        <a href="../admin/restore"><i class="fa fa-desktop"></i> 数据重跑</a>
+                        <a href="/admin_page/admin/restore"><i class="fa fa-desktop"></i> 数据重跑</a>
                     </li>
                 </ul>
 
@@ -57,101 +57,86 @@
         <!-- /. NAV SIDE  -->
 
 
-		<div id="page-wrapper">
+        <div id="page-wrapper">
             <div class="header">
                 <h1 class="page-header">
-                    	数据监视<small>Data Monitor</small>
+                        数据监视<small>Data Monitor</small>
                 </h1>
             </div>
             <div id="page-inner">
 
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                               	站点数据采集量折线图
+                            </div>
+                            <div class="panel-body">
+                                <div id="morris-line-chart"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                	各站点数据采集量分布图
+                            </div>
+                            <div class="panel-body">
+                                <div id="donut-chart-by-site"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                               	各频道数据采集量分布图
+                            </div>
+                            <div class="panel-body">
+                                <div id="bar_chart_by_channel"></div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                               	各站点数据采集量分布图
+                            </div>
+                            <div class="panel-body">
+                                <div id="bar_chart_by_site"></div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                               		各频道数据采集量分布图
+                            </div>
+                            <div class="panel-body">
+	                            <div id="morris-donut-chart"></div>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
                 <!-- /. ROW  -->
-			 <pre class="row">
-				#if (data_line_chart)
-          			#(data_line_chart.toString())
-                    #(data_line_chart.keySet()) <br/>
-                    #((data_line_chart.keySet()).toArray())
-                   
-	          	#else
-	          		no data fonund! <br/>
-	          	#end
-	          	ykeys:
-	          	#(yKeys[0])   
-	          	     
-	  
 
-	          	
-        	</pre>
-				<div class="row">
-					<div class="col-md-12">
-						<div class="panel panel-default">
-							<div class="panel-heading">
-									Line Chart
-							</div>
-							<div class="panel-body">
-								<div id="morris-line-chart"></div>
-							</div>
-						</div>
-					</div>
-
-				</div>
-
-				<div class="row">
-                    <div class="col-md-6 col-sm-12 col-xs-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                Donut Chart Example
-                            </div>
-                            <div class="panel-body">
-                                <div id="morris-donut-chart"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-sm-12 col-xs-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                Donut Chart Example
-                            </div>
-                            <div class="panel-body">
-                                <div id=""></div>
-                            </div>
-                        </div>
-                    </div>
-				</div>
-				<div class="row">
-
-					<div class="col-md-6">
-						<div class="panel panel-default">
-							<div class="panel-heading">
-		                       Bar Chart Example
-		                    </div>
-		                    <div class="panel-body">
-		                        <div id="morris-bar-chart"></div>
-		                    </div>
-
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="panel panel-default">
-							<div class="panel-heading">
-		                       Bar Chart Example
-		                    </div>
-		                    <div class="panel-body">
-		                        <div id=""></div>
-		                    </div>
-
-						</div>
-					</div>
-				</div>
-
-		        <!-- /. ROW  -->
-
-				<footer>
+                <footer>
                     <p class="cpr">
                         Copyright &copy; 2017 <a href="http://www.sc.sdu.edu.cn/" target="_blank">山东大学软件学院</a>
                         All rights reserved.<a target="_blank" href="http://www.LarryBrin.com/">LarryBrin for search</a>
                     </p>
-				</footer>
+                </footer>
             </div>
             <!-- /. PAGE INNER  -->
         </div>
@@ -160,17 +145,17 @@
     <!-- /. WRAPPER  -->
     <!-- JS Scripts-->
     <!-- jQuery Js -->
-    <script src="assets/js/jquery-1.10.2.js"></script>
+    <script src="/admin_page/assets/js/jquery-1.10.2.js"></script>
     <!-- Bootstrap Js -->
-    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="/admin_page/assets/js/bootstrap.min.js"></script>
 
     <!-- Metis Menu Js -->
-    <script src="assets/js/jquery.metisMenu.js"></script>
+    <script src="/admin_page/assets/js/jquery.metisMenu.js"></script>
     <!-- Morris Chart Js -->
-    <script src="assets/js/morris/raphael-2.1.0.min.js"></script>
-    <script src="assets/js/morris/morris.js"></script>
+    <script src="/admin_page/assets/js/morris/raphael-2.1.0.min.js"></script>
+    <script src="/admin_page/assets/js/morris/morris.js"></script>
 
-	 <script src="assets/js/Lightweight-Chart/jquery.chart.js"></script>
+     <script src="/admin_page/assets/js/Lightweight-Chart/jquery.chart.js"></script>
 
     <!-- Custom Js -->
     <script type="text/javascript">
@@ -198,97 +183,190 @@
                     /* MORRIS BAR CHART
                     -----------------------------------------*/
                     Morris.Bar({
-                        element: 'morris-bar-chart',
-                        data: [{
-                            y: '2003',
-                            a: 100,
-                            b: 90
-                        }, {
-                            y: '2007',
-                            a: 75,
-                            b: 65
-                        }, {
-                            y: '2008',
-                            a: 50,
-                            b: 40
-                        }, {
-                            y: '2009',
-                            a: 75,
-                            b: 65
-                        }, {
-                            y: '2010',
-                            a: 50,
-                            b: 40
-                        }, {
-                            y: '2011',
-                            a: 75,
-                            b: 65
-                        }, {
-                            y: '2012',
-                            a: 100,
-                            b: 90
-                        }],
-                        xkey: 'y',
-                        ykeys: ['a', 'b'],
-                        labels: ['Series A', 'Series B'],
-                         barColors: [
-                        '#22a7f0','#1abc9c',
-                        '#A8E9DC'
-                      ],
+                        element: 'bar_chart_by_site',
+                        #if(data_by_web_site)
+							
+							data:[
+							#for(site_name:data_by_web_site.keySet())
+								{y:'#(site_name)',a:#(data_by_web_site.get(site_name))},
+							#end
+							],
+							xkey: 'y',
+							ykeys: ['a'],
+							labels: ['数据采集总量'],             
+                        #else
+                            data:[  {y: '2003', a: 100, b: 90},
+                                {y: '2007', a: 75, b: 65},
+                                {y: '2008', a: 50, b: 40},
+                                {y: '2009', a: 75, b: 65},
+                                {y: '2010', a: 50, b: 40},
+                                {y: '2011', a: 75, b: 65},
+                                {y: '2012', a: 100, b: 90}],
+
+	                        xkey: 'y',
+	                        ykeys: ['a', 'b'],
+	                        labels: ['Series A'],             
+                        	
+                        #end
+
+                        barColors: ['#22a7f0','#1abc9c',],
                         hideHover: 'auto',
                         resize: true
                     });
+                    /* MORRIS BAR CHART
+                    -----------------------------------------*/
+                    Morris.Bar({
+                        element: 'bar_chart_by_channel',
+                        #if(data_by_channel)
+							
+							data:[
+							#for(channel_name : data_by_channel.keySet())
+								{y:'#(channel_name)',a:#(data_by_channel.get(channel_name))},
+							#end
+							],
+							xkey: 'y',
+							ykeys: ['a'],
+							labels: ['数据采集总量'],           
+                        #else
+                            data:[  {y: '2003', a: 100, b: 90},
+                                {y: '2007', a: 75, b: 65},
+                                {y: '2008', a: 50, b: 40},
+                                {y: '2009', a: 75, b: 65},
+                                {y: '2010', a: 50, b: 40},
+                                {y: '2011', a: 75, b: 65},
+                                {y: '2012', a: 100, b: 90}],
 
+	                        xkey: 'y',
+	                        ykeys: ['a', 'b'],
+	                        labels: ['Series A'],             
+                        	
+                        #end
+
+                        barColors: ['#22a7f0','#1abc9c',],
+                        hideHover: 'auto',
+                        resize: true
+                    });
                     /* MORRIS DONUT CHART
                     ----------------------------------------*/
                     Morris.Donut({
                         element: 'morris-donut-chart',
-                        data: [{
-                            label: "Download Sales",
-                            value: 12
-                        }, {
-                            label: "In-Store Sales",
-                            value: 30
-                        }, {
-                            label: "Mail-Order Sales",
-                            value: 20
-                        }],
+						#if(data_by_channel)
+							
+							data:[
+							#for(channel_name : data_by_channel.keySet())
+								{label:'#(channel_name)',value:#(data_by_channel.get(channel_name))},
+							#end
+							],
+          
+                        #else
+	                        data: [{
+	                            label: "Download Sales",
+	                            value: 12
+	                        }, {
+	                            label: "In-Store Sales",
+	                            value: 30
+	                        }, {
+	                            label: "Mail-Order Sales",
+	                            value: 20
+	                        }],
+	                    #end
                            colors: [
                             '#22a7f0','#1abc9c',
-                            '#A8E9DC'
+                            '#A8E9DC','#00a','#0aa','#a00','#a0a','#aa0',
+                            '#00d','#0d0','#0dd','#d00','#d0d',
+                            '#dd0','#ddd','#aad','#ada','#add',
+                            '#daa','#dad','#dda'
                           ],
                         resize: true
                     });
-
+                    Morris.Donut({
+                        element: 'donut-chart-by-site',
+						#if(data_by_channel)
+							
+							data:[
+							#for(site_name : data_by_web_site.keySet())
+								{label:'#(site_name)',value:#(data_by_web_site.get(site_name))},
+							#end
+							],
+          
+                        #else
+	                        data: [{
+	                            label: "Download Sales",
+	                            value: 12
+	                        }, {
+	                            label: "In-Store Sales",
+	                            value: 30
+	                        }, {
+	                            label: "Mail-Order Sales",
+	                            value: 20
+	                        }],
+	                    #end
+                           colors: [
+                            '#22a7f0','#1abc9c',
+                            '#A8E9DC','#00a','#0aa','#a00','#a0a','#aa0',
+                            '#00d','#0d0','#0dd','#d00','#d0d',
+                            '#dd0','#ddd','#aad','#ada','#add',
+                            '#daa','#dad','#dda'
+                          ],
+                        resize: true
+                    });
                     /* MORRIS LINE CHART
                     ----------------------------------------*/
                     Morris.Line({
                         element: 'morris-line-chart',
-                        
-                        	#if(data_line_chart)
-                        		#set (count=0)
 
-                        		data:[
-                        		#for(site_name:data_line_chart.keySet())
-                            		#set (yKey = yKeys[count])
-                            		#set (count=count+1)
-                        			#set (one_site=data_line_chart.get(site_name))
-                        			#for(time_stamp:one_site.keySet())
-                        				{y:'#(time_stamp)',#(yKey):#(one_site.get(time_stamp))},
-                        			#end
-                        			
-                        		#end
-                        		],
+                            #if(data_line_chart)
+                                ###填充站点名数组
+                                #set (count = 0)
+                                #for(site_name:data_line_chart.keySet())
+                                    #set (array[count] = site_name)
+                                    #set(count=count+1)
+                                #end
+                                #set(total_site=count)
 
+                                ###时间线
+                                #set(time_line=(data_line_chart[array[0]]).keySet())
+
+                                data:[
+
+                                    #for(time_stamp:time_line)
+                                        ### { y: '2015', a: 165,  b: 185},
+                                        #for(time_stamp:time_line)
+                                            ### { y: '2015', a: 165,  b: 185},
+                                            {y:'#(time_stamp)',
+                                                #for(i=0;i<(count);i++)
+                                                    #(yKeys[i]):#(data_line_chart[array[i]][time_stamp]),
+                                                #end
+                                            },
+
+                                    #end
+
+
+                                    #end
+
+                                ],
 
                                     xkey: 'y',
-                                    ykeys: ['a', 'b'],
-                                    labels: ['新浪网', 'Total Outcome'],
-                                    
-                        	#else
-                        	data: [
-                              { y: '2014', a: 50},
-                              { y: '2014',  b: 190},
+                                    ###ykeys: ['a', 'b'],
+                                    ykeys:[
+                                        #for(i=0;i<(count);i++)
+                                            '#(yKeys[i])',
+                                        #end
+                                    ],
+                                    ###labels: ['新浪网', 'Total Outcome'],
+                                    labels:[
+                                        #for(i=0;i<(count);i++)
+                                            '#(array[i])',
+                                        #end
+                                    ],
+
+                                    lineColors:['green','#00a','#0aa','#a00','#a0a','#aa0',
+                                                        '#00d','#0d0','#0dd','#d00','#d0d',
+                                                        '#dd0','#ddd','#aad','#ada','#add',
+                                                        '#daa','#dad','#dda'],
+                            #else
+                            data: [
+
                               { y: '2015', a: 165,  b: 185},
                               { y: '2016', a: 150,  b: 130},
                               { y: '2017', a: 175,  b: 160},
@@ -303,16 +381,16 @@
                               xkey: 'y',
                               ykeys: ['a', 'b'],
                               labels: ['Total Income', 'Total Outcome'],
-                              
+                              lineColors:['green','#1abc9c']
                             #end
-                            
+
                             fillOpacity: 0.6,
                             hideHover: 'auto',
                             behaveLikeLine: true,
                             resize: true,
                             pointFillColors:['#ffffff'],
                             pointStrokeColors: ['black'],
-                            lineColors:['gray','#1abc9c']
+
 
                     });
 

@@ -1,5 +1,9 @@
+@CHARSET "UTF-8";
+@import url("common.css");
+
 
 /* 页面/index/index.html的样式表 */
+
 #search_text_index{ /* 首页的搜索栏 */
 	width:99%;
 	height:40px;

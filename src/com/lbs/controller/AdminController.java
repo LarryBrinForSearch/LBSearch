@@ -15,6 +15,13 @@ public class AdminController extends Controller {
 		moniter();
 	}
 	public void moniter(){
+		line_chart(); // 绘制折线图
+		setAttr("data_by_web_site",SearchFromES.aggSearch("website_name"));
+		setAttr("data_by_channel",SearchFromES.aggSearch("channel_name"));
+		render("/admin_page/dataMoniter.html");
+	}
+	// 绘制折线图
+	private void line_chart(){
 		// 折线图数据，用一个Map对象line_chart_data传递，
 		// 对象line_chart_data的键和值分别是一个map对象，
 		// 对象line_chart_data 值是map对象，一个值包含了一个站点数据采集量
@@ -27,12 +34,15 @@ public class AdminController extends Controller {
 		for(String site:sites){
 			line_chart_data.put(site,CountByDate.getCountResultByDay(7,1,7,17,site));
 		}
+		
 
 		setAttr("data_line_chart",line_chart_data);
 		setAttr("hello","hello");
 		setAttr("yKeys",yKeys);
-		render("/admin_page/dataMoniter.html");
+		setAttr("array",new String[26]);
 	}
+	
+	
 	public void restore(){
 
 		render("/admin_page/dataRestore.html");

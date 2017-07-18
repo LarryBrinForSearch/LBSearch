@@ -1,0 +1,21 @@
+@CHARSET "UTF-8";
+ body{
+ 	font-family:"Times New Roman";
+	font-size:19px;
+	background-color:white;
+
+}
+a:link{
+	color:blue;
+	font-size:bold;
+}
+a:visited{
+	color:purple;
+}
+a:active{
+	color:red;
+}
+
+a:hover{
+	color:#e00;
+}
