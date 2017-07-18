@@ -123,10 +123,10 @@
                     <div class="col-md-6">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                               Bar Chart Example
+                               	各站点数据采集量分布图
                             </div>
                             <div class="panel-body">
-                                <div id="morris-bar-chart"></div>
+                                <div id="bar_chart_by_site"></div>
                             </div>
 
                         </div>
@@ -134,10 +134,10 @@
                     <div class="col-md-6">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                               Bar Chart Example
+                               	各频道数据采集量分布图
                             </div>
                             <div class="panel-body">
-                                <div id=""></div>
+                                <div id="bar_chart_by_channel"></div>
                             </div>
 
                         </div>
@@ -198,7 +198,7 @@
                     /* MORRIS BAR CHART
                     -----------------------------------------*/
                     Morris.Bar({
-                        element: 'morris-bar-chart',
+                        element: 'bar_chart_by_site',
                         #if(data_by_web_site)
 							
 							data:[
@@ -228,7 +228,39 @@
                         hideHover: 'auto',
                         resize: true
                     });
+                    /* MORRIS BAR CHART
+                    -----------------------------------------*/
+                    Morris.Bar({
+                        element: 'bar_chart_by_channel',
+                        #if(data_by_channel)
+							
+							data:[
+							#for(channel_name : data_by_channel.keySet())
+								{y:'#(channel_name)',a:#(data_by_channel.get(channel_name))},
+							#end
+							],
+							xkey: 'y',
+							ykeys: ['a'],
+							labels: ['数据采集总量'],             
+                        #else
+                            data:[  {y: '2003', a: 100, b: 90},
+                                {y: '2007', a: 75, b: 65},
+                                {y: '2008', a: 50, b: 40},
+                                {y: '2009', a: 75, b: 65},
+                                {y: '2010', a: 50, b: 40},
+                                {y: '2011', a: 75, b: 65},
+                                {y: '2012', a: 100, b: 90}],
 
+	                        xkey: 'y',
+	                        ykeys: ['a', 'b'],
+	                        labels: ['Series A'],             
+                        	
+                        #end
+
+                        barColors: ['#22a7f0','#1abc9c',],
+                        hideHover: 'auto',
+                        resize: true
+                    });
                     /* MORRIS DONUT CHART
                     ----------------------------------------*/
                     Morris.Donut({
