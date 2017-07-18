@@ -65,28 +65,11 @@
             </div>
             <div id="page-inner">
 
-				<pre class = "row">
-					#if(data_by_web_site)
-						
-						#(data_by_web_site)
-						#for(site_name:data_by_web_site.keySet())
-							key:#(site_name);;;value:#(data_by_web_site.get(site_name))
-						#end
-					#else
-						no data_by_site
-					#end
-					#if(data_by_channel)
-						#(data_by_channel)
-					#else
-						no data_by_channel
-					#end					
-				</pre>
-
                 <div class="row">
                     <div class="col-md-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                    Line Chart
+                               	站点数据采集量折线图
                             </div>
                             <div class="panel-body">
                                 <div id="morris-line-chart"></div>
@@ -100,21 +83,22 @@
                     <div class="col-md-6 col-sm-12 col-xs-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                Donut Chart Example
+                                	各站点数据采集量分布图
                             </div>
                             <div class="panel-body">
-                                <div id="morris-donut-chart"></div>
+                                <div id="donut-chart-by-site"></div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-sm-12 col-xs-12">
+                    <div class="col-md-6">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                Donut Chart Example
+                               	各频道数据采集量分布图
                             </div>
                             <div class="panel-body">
-                                <div id=""></div>
+                                <div id="bar_chart_by_channel"></div>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -131,17 +115,18 @@
 
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-sm-12 col-xs-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                               	各频道数据采集量分布图
+                               		各频道数据采集量分布图
                             </div>
                             <div class="panel-body">
-                                <div id="bar_chart_by_channel"></div>
+	                            <div id="morris-donut-chart"></div>
+                                
                             </div>
-
                         </div>
                     </div>
+
                 </div>
 
                 <!-- /. ROW  -->
@@ -241,7 +226,7 @@
 							],
 							xkey: 'y',
 							ykeys: ['a'],
-							labels: ['数据采集总量'],             
+							labels: ['数据采集总量'],           
                         #else
                             data:[  {y: '2003', a: 100, b: 90},
                                 {y: '2007', a: 75, b: 65},
@@ -265,16 +250,26 @@
                     ----------------------------------------*/
                     Morris.Donut({
                         element: 'morris-donut-chart',
-                        data: [{
-                            label: "Download Sales",
-                            value: 12
-                        }, {
-                            label: "In-Store Sales",
-                            value: 30
-                        }, {
-                            label: "Mail-Order Sales",
-                            value: 20
-                        }],
+						#if(data_by_channel)
+							
+							data:[
+							#for(channel_name : data_by_channel.keySet())
+								{label:'#(channel_name)',value:#(data_by_channel.get(channel_name))},
+							#end
+							],
+          
+                        #else
+	                        data: [{
+	                            label: "Download Sales",
+	                            value: 12
+	                        }, {
+	                            label: "In-Store Sales",
+	                            value: 30
+	                        }, {
+	                            label: "Mail-Order Sales",
+	                            value: 20
+	                        }],
+	                    #end
                            colors: [
                             '#22a7f0','#1abc9c',
                             '#A8E9DC','#00a','#0aa','#a00','#a0a','#aa0',
@@ -284,7 +279,37 @@
                           ],
                         resize: true
                     });
-
+                    Morris.Donut({
+                        element: 'donut-chart-by-site',
+						#if(data_by_channel)
+							
+							data:[
+							#for(site_name : data_by_web_site.keySet())
+								{label:'#(site_name)',value:#(data_by_web_site.get(site_name))},
+							#end
+							],
+          
+                        #else
+	                        data: [{
+	                            label: "Download Sales",
+	                            value: 12
+	                        }, {
+	                            label: "In-Store Sales",
+	                            value: 30
+	                        }, {
+	                            label: "Mail-Order Sales",
+	                            value: 20
+	                        }],
+	                    #end
+                           colors: [
+                            '#22a7f0','#1abc9c',
+                            '#A8E9DC','#00a','#0aa','#a00','#a0a','#aa0',
+                            '#00d','#0d0','#0dd','#d00','#d0d',
+                            '#dd0','#ddd','#aad','#ada','#add',
+                            '#daa','#dad','#dda'
+                          ],
+                        resize: true
+                    });
                     /* MORRIS LINE CHART
                     ----------------------------------------*/
                     Morris.Line({
