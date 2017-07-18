@@ -27,7 +27,7 @@ public class AdminController extends Controller {
 		// 对象line_chart_data 值是map对象，一个值包含了一个站点数据采集量
 		Map<String,Map<String,Integer>> line_chart_data = 
 				new HashMap< String,Map<String, Integer>>();
-		String sites[] = {"新浪网","百度网"};
+		String sites[] = {"新浪网","百度网","国搜新闻网","环球网","凤凰网"};
 		String [] yKeys = {"a", "b", "c", "d", "e", "f", "g", 
 				"h", "i", "j", "k", "l", "m", "n", 
 				"o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", };
