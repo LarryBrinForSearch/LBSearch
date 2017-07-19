@@ -73,7 +73,10 @@
 		
 		#for(x : result.getJsonArr())
 		<div class="item">
-			<div style="text-align:left;" class="result_title" ><a href='#(x.get("url"))' target="_blank"> #(x.get("title")) </a></div>
+		<h3 style="text-align:left;" class="result_title" >
+			<a href='#(x.get("url"))' target="_blank"> #(x.get("title")?x.get("title"):"（暂无标题）") </a>
+		</h3>
+
 			<div class="label">来源：#(x.get("website_name")) &nbsp; 
 				
 				#if (x.get("pubtime")!="")
