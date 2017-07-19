@@ -28,12 +28,22 @@
 
 				 <table id="s_tb" border="0" align="center" >
 				 <tr>
-					<td colspan="7"><input id="search_text" type="text"  name="searchString" /><td>
-					<td colspan="2"><input id="s_button" value="搜索" type="submit" ></td>
+                        #if(channel)
+                                <td colspan="2"><img hidefocus=true src="/lbs2/img/#(channel).png" class="right" width="40" height="40" /></td>
+                                                <td colspan="7"><input id="search_text" type="text"  name="searchString" /><td>
+                                                <td colspan="2"><input id="s_button" value="搜索" type="submit" ></td>
+                                        #else
+                                <td colspan="2">&nbsp;</td>
+                                                <td colspan="7"><input id="search_text" type="text"  name="searchString" /><td>
+                                                <td colspan="2"><input id="s_button" value="搜索" type="submit" ></td>
+                        #end
+
 				 </tr>
 	
 					<input type="hidden" name="channel" value=#(channel)  />
 				<tr id="tag">
+					<td colspan="2">&nbsp;</td>
+
 					<td><a href="/result/setChannel2/1">财经</a></td>
 					<td><a href="/result/setChannel2/2">国际</a></td>
 					<td><a href="/result/setChannel2/3">股票</a></td>
